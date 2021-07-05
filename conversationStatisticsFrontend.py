@@ -29,8 +29,7 @@ class GeneralShow(GeneralInfo, PlotShow):
         questionsPercent = "Stosunek pytań do wszystkich wiadomości: {}%\n".format(self.questionsToAllPercent())
         xdToAllPercent = 'Stosunek "XD" do wszystkich wiadomości: {}%\n'.format(self.xdToAllPercent())
         wordTotal = 'Wysłanych słów {}\n'.format(self.wordTotal())
-        topWord = 'Najczęściej występujące słowo - "{x_y[0]}": {x_y[1]} razy\n'.format(x_y=self.topWordTotal())
-        plt.figtext(0.1, 0.2, messagesNumber + wordTotal + topWord + avgMessagesPerPerson + avgMessageLength +
+        plt.figtext(0.1, 0.2, messagesNumber + wordTotal + avgMessagesPerPerson + avgMessageLength +
                     textMessagesTotal + multimediaConversationTotal + photoConversationTotal + videoConversationTotal +
                     questions + xdConversationTotal + unsentTotal + reactionsTotal + heartsTotal + hahaTotal + wowTotal
                     + thumbsTotal + eyesTotal + questionsPercent + xdToAllPercent)
