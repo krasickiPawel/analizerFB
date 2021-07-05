@@ -66,7 +66,8 @@ class GeneralInfo(ConversationOperationTemplates):
         return len(self.conversationInfo.messages)
 
     def avgMessageAmountPerPerson(self):
-        return int(len(self.conversationInfo.messages) / len(self.conversationInfo.participants))
+        return int(len(self.conversationInfo.messages) / len(self.conversationInfo.participants)) if \
+            len(self.conversationInfo.participants) > 0 else 0
 
     def photoTotal(self):
         return self.photoVideoTotal("photos")
@@ -80,7 +81,7 @@ class GeneralInfo(ConversationOperationTemplates):
     def avgMessageLength(self):
         messagesLen = [len(message.get("content")) for message in self.conversationInfo.messages
                        if message.get("content") is not None]
-        return int(sum(messagesLen) / len(messagesLen))
+        return int(sum(messagesLen) / len(messagesLen)) if len(messagesLen) > 0 else 0
 
     def reactionTotal(self):
         return sum([len(message.get("reactions")) for message in self.conversationInfo.messages
@@ -139,7 +140,7 @@ class GeneralInfo(ConversationOperationTemplates):
     def topWordTotal(self):
         wordList = []
         for content in self.contentList():
-            for word in content.split():
+            for word in list(content.split()):
                 wordList.append(word)
         maxWord = max(wordList)
         return maxWord, wordList.count(maxWord)
@@ -293,3 +294,11 @@ class AnalConversation(ConversationOperationTemplates):
                              self.conversationInfo.messages if message.get("content") is not None and
                              message.get("content")[0] == "?"]
         return self.sortDict(self.prepareDict(onlyQuestionMarks))
+
+    def mostWordUsage(self):   # counter koniecznie zliczający listę wszystkich moich słów
+        wordList = []
+        for messageDict in self.conversationInfo.messages:
+            if messageDict.get("content") is not None:
+                for word in messageDict.get("content").split():
+                    wordList.append((word, 1))
+        return self.sortDict(self.prepareDict(wordList))

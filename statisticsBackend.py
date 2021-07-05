@@ -116,7 +116,7 @@ class Total(TotalOperationTemplates):
             for messageDict in conversation.messages:
                 if messageDict.get("content") is not None:
                     messagesLen.append(len(messageDict.get("content")))
-        return int(sum(messagesLen) / len(messagesLen))
+        return int(sum(messagesLen) / len(messagesLen)) if len(messagesLen) > 0 else 0
 
     def myAvgMessageLen(self, name="Pawel Krasicki"):
         messagesLen = []
@@ -124,7 +124,7 @@ class Total(TotalOperationTemplates):
             for messageDict in conversation.messages:
                 if messageDict.get("content") is not None and messageDict.get("sender_name") == name:
                     messagesLen.append(len(messageDict.get("content")))
-        return int(sum(messagesLen) / len(messagesLen))
+        return int(sum(messagesLen) / len(messagesLen)) if len(messagesLen) > 0 else 0
 
     def messengerReactionsTotal(self):
         total = 0
@@ -158,14 +158,17 @@ class Total(TotalOperationTemplates):
                 if messageDict.get("content") is not None:
                     for word in messageDict.get("content").split():
                         wordList.append(word)
-        maxWord = max(wordList)
-        return maxWord, wordList.count(maxWord)
+        if len(wordList) > 0:
+            maxWord = max(wordList)
+            return maxWord, wordList.count(maxWord)
+        else:
+            return 0, 0
 
     def questionsToAllPercent(self):
-        return int(100 * (self.questionsTotal() / self.messengerSentTotal()))
+        return int(100 * (self.questionsTotal() / self.messengerSentTotal())) if self.messengerSentTotal() > 0 else 0
 
     def xdToAllPercent(self):
-        return int(100 * (self.xdTotal() / self.messengerSentTotal()))
+        return int(100 * (self.xdTotal() / self.messengerSentTotal())) if self.messengerSentTotal() > 0 else 0
 
     def photoTotal(self):
         return self.photoVideoTemplate("photos")
@@ -317,10 +320,10 @@ class Total(TotalOperationTemplates):
         return maxWord, wordList.count(maxWord)
 
     def myQuestionsToAllPercent(self, name):
-        return int(100 * (self.myQuestionsTotal(name) / self.mySentTotal()))
+        return int(100 * (self.myQuestionsTotal(name) / self.mySentTotal(name))) if self.mySentTotal() > 0 else 0
 
     def myXDToAllPercent(self, name):
-        return int(100 * (self.myXDTotal(name) / self.mySentTotal()))
+        return int(100 * (self.myXDTotal(name) / self.mySentTotal(name))) if self.mySentTotal() > 0 else 0
 
 
 class ComparePeopleOperationTemplates(OperationTemplates):

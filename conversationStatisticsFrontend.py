@@ -121,7 +121,7 @@ class ConversationPeopleShow(AnalConversation, GeneralInfo, PlotShow):
         self.showPlot(self.mostPersonMessageLength(), title, xLabel)
 
     def charWritenShow(self):
-        title = "Napisanych pojedynczych znaków z {} wszystkich znaków na konfie".format(self.topWordTotal())
+        title = "Napisanych pojedynczych znaków z {} wszystkich znaków na konfie".format(self.charTotal())
         xLabel = "Najwięcej razy w klawiaturę uderzył {}: {}"
         self.showPlot(self.mostCharWriten(), title, xLabel)
 
@@ -152,9 +152,11 @@ class ConversationPeopleShow(AnalConversation, GeneralInfo, PlotShow):
         self.showPlot(self.mostKurwaGiver(), title, xLabel)
 
     def mostTopWordGiverShow(self):
-        topWord, topWordAmount = self.topWordTotal()
-        title = 'Ilość napisanych "{}" na wszystkie {} "{}"'.format(topWord, topWordAmount, topWord)
+        topWord_topWordAmount = self.topWordTotal()
+        topWord, topWordAmount = topWord_topWordAmount
+        title = 'Ilość napisanych "{top}" na wszystkie {num} "{top}"'.format(top=topWord, num=topWordAmount)
         xLabel = 'Najwięcej od {}: {}'
+        print(topWord, topWordAmount)
         self.showPlot(self.mostTopWordGiver(topWord), title, xLabel)
 
     def mostGivenWordGiverShow(self, word):
@@ -218,6 +220,11 @@ class ConversationPeopleShow(AnalConversation, GeneralInfo, PlotShow):
             format(self.onlyQuestionTotal())
         xLabel = 'Najwięcej samych "?" od {}: {}'
         self.showPlot(self.mostOnlyQuestionGiver(), title, xLabel)
+
+    def mostWordUsageShow(self):
+        title = "Najczęściej używane słowa na konwersacji"
+        xLabel = 'Najczęściej używane "{}": {}'
+        self.showPlot(self.mostWordUsage(), title, xLabel)
 
 
 class Show(ConversationPeopleShow, GeneralShow):

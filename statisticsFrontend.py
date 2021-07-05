@@ -36,7 +36,7 @@ class MyTotalShow(Total, PlotShow):
 
     def myGeneralInfoShow(self, name):
         plt.figure(figsize=(8, 5))
-        plt.suptitle('Statystyki tego co napisałeś na całym messengerze')
+        plt.suptitle('Statystyki tego co {} napisał(a) na całym messengerze'.format(name))
         messagesNumber = "{} wiadomości \n".format(self.mySentTotal(name))
         textMessagesTotal = "Wiadomości tekstowych: {} \n".format(self.myTextMessagesSentTotal(name))
         avgMessageLength = "Średnia długość wiadomości: {} znaków \n".format(self.myAvgMessageLen(name))
@@ -59,7 +59,7 @@ class MyTotalShow(Total, PlotShow):
         questions = "Zadanych pytań: {}\n".format(self.myQuestionsTotal(name))
         questionsPercent = "Stosunek pytań do wszystkich wiadomości: {}%\n".format(self.myQuestionsToAllPercent(name))
         xdToAllPercent = 'Stosunek "XD" do wszystkich wiadomości: {}%\n'.format(self.myXDToAllPercent(name))
-        plt.figtext(0.1, 0.2, messagesNumber + avgMessageLength + textMessagesTotal +
+        plt.figtext(0.1, 0.08, messagesNumber + avgMessageLength + textMessagesTotal +
                     multimediaTotal + photoTotal + videoTotal + questions +
                     xdTotal + unsentTotal + reactionsTotal + heartsTotalG + heartsTotalR + hahaTotalG + hahaTotalR +
                     thumbsTotalG + thumbsTotalR + eyesTotalG + eyesTotalR + wowTotalG + wowTotalR + questionsPercent +
@@ -68,7 +68,7 @@ class MyTotalShow(Total, PlotShow):
 
     def myPieShow(self, name):
         plt.figure(figsize=(12, 6.5))
-        plt.suptitle('Statystyka wiadomości wysłanych przez Ciebie')
+        plt.suptitle('Statystyka wiadomości wysłanych przez {}'.format(name))
         plt.subplot(3, 2, 1)
         self.myXDPie(name)
         plt.subplot(3, 2, 2)
@@ -78,9 +78,9 @@ class MyTotalShow(Total, PlotShow):
         plt.subplot(3, 2, 4)
         self.myEmoticonPie2(name)
         plt.subplot(3, 2, 5)
-        self.myTopWordPie(name)
-        plt.subplot(3, 2, 6)
         self.myQuestionPie(name)
+        plt.subplot(3, 2, 6)
+        self.myReceivedToGivenReactionsPie(name)
         plt.show()
 
     def myXDPie(self, name):
@@ -112,10 +112,9 @@ class MyTotalShow(Total, PlotShow):
         y2 = [self.myQuestionsTotal(name), self.myTextMessagesSentTotal(name) - self.myQuestionsTotal(name)]
         return plt.pie(y2, labels=x2)
 
-    def myTopWordPie(self, name):
-        x = ['najczęściej używane słowo', 'reszta słów']
-        topWord, topWordTotal = self.myTopWordTotal(name)
-        y = [topWordTotal, self.mySentTotal(name)]
+    def myReceivedToGivenReactionsPie(self, name):
+        x = ['otrzymane reakcje', 'dane reakcje']
+        y = [self.myReactionsReceivedTemplate("", name), self.myReactionsGivenTemplate("", name)]
         return plt.pie(y, labels=x)
 
 
@@ -239,8 +238,6 @@ class ComparePeopleShow(Total, ComparePeople, PlotShow):
 
     def compareTopWordAmountShow(self):
         topWord, topWordAmount = self.topWordTotal()
-        print(self.topWordTotal())
-        print(topWord, topWordAmount)
         title = 'Ilość "{}" z daną osobą z {} wszystkich "{}"'.format(topWord, topWordAmount, topWord)
         xLabel = 'Najwięcej "{word1}" z {blank1}: {blank2}'.format(word1=topWord, blank1='{}', blank2='{}')
         self.showPlot(self.compareTopWordAmount(topWord), title, xLabel)
