@@ -116,7 +116,7 @@ class Main:
             s.compareKurwaAmountShow()
             s.compareJaPierdoleAmountShow()
             s.compareHahaWordAmountShow()
-            s.compareGivenWordAmountShow("nudes")
+            # s.compareGivenWordAmountShow("nudes")
             s.compareHeartsAmountShow()
             s.compareHahaAmountShow()
             s.compareWowAmountShow()

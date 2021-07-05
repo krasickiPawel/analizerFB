@@ -15,7 +15,7 @@ class PlotShow:
         plt.bar(x, y)
         plt.xticks(x, x, rotation='vertical')
         plt.margins(0.01)
-        plt.subplots_adjust(bottom=0.35)
+        plt.subplots_adjust(bottom=0.42)
         plt.xlabel(xLabelText.format(firstValue(xPerson), firstValue(y)))
         plt.show()
 

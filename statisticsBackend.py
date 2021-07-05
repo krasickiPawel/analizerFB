@@ -2,7 +2,7 @@ class OperationTemplates:
     @staticmethod
     def sortDict(unsortedDict):
         sortedList = sorted(unsortedDict.items(), key=lambda x: x[1], reverse=True)[:40]
-        return {pair[0][:25]: pair[1] for pair in sortedList}
+        return {pair[0][:24]: pair[1] for pair in sortedList}
 
     @staticmethod
     def prepareDict(tupleList):
