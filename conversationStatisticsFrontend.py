@@ -38,14 +38,18 @@ class GeneralShow(GeneralInfo, PlotShow):
     def pieShow(self):
         plt.figure(figsize=(12, 6.5))
         plt.suptitle(self.conversationInfo.title)
-        plt.subplot(2, 2, 1)
+        plt.subplot(3, 2, 1)
         self.xdPie()
-        plt.subplot(2, 2, 2)
+        plt.subplot(3, 2, 2)
         self.multimediaPie()
-        plt.subplot(2, 2, 3)
+        plt.subplot(3, 2, 3)
         self.emoticonPie()
-        plt.subplot(2, 2, 4)
+        plt.subplot(3, 2, 4)
         self.questionPie()
+        plt.subplot(3, 2, 5)
+        self.omgHahaXDPie()
+        plt.subplot(3, 2, 6)
+        self.superSztosMegaSwietnieZajebisciePie()
         plt.show()
 
     def xdPie(self):
@@ -54,9 +58,9 @@ class GeneralShow(GeneralInfo, PlotShow):
         return plt.pie(y, labels=x, startangle=0)
 
     def multimediaPie(self):
-        x2 = ['zdjęcia i filmiki', 'wiadomości tekstowe']
-        y2 = [self.multimediaTotal(), self.textMessagesTotal()]
-        return plt.pie(y2, labels=x2)
+        x = ['zdjęcia i filmiki', 'wiadomości tekstowe']
+        y = [self.multimediaTotal(), self.textMessagesTotal()]
+        return plt.pie(y, labels=x)
 
     def emoticonPie(self):
         x = ['serduszka ❤', 'serduszka w oczach', 'kciuki', 'haha', 'wow']
@@ -64,9 +68,21 @@ class GeneralShow(GeneralInfo, PlotShow):
         return plt.pie(y, labels=x, startangle=0) if sum(y) > 0 else None
 
     def questionPie(self):
-        x2 = ['pytania', 'wiadomości bez pytań']
-        y2 = [self.questionsTotal(), self.messagesTotal() - self.questionsTotal()]
-        return plt.pie(y2, labels=x2)
+        x = ['pytania', 'wiadomości bez pytań']
+        y = [self.questionsTotal(), self.messagesTotal() - self.questionsTotal()]
+        return plt.pie(y, labels=x)
+
+    def omgHahaXDPie(self):
+        x = ['omg', 'napisane "haha"', 'xD', 'emotka śmiechu']
+        y = [self.omgTotal(), self.hahaTotal(), self.xdConversationTotal(), self.givenWordTotal('😂')
+             + self.givenWordTotal('😆')]
+        return plt.pie(y, labels=x)
+
+    def superSztosMegaSwietnieZajebisciePie(self):
+        x = ['super', 'sztos', 'mega', 'świetnie', 'zajebiście']
+        y = [self.givenWordTotal('super'), self.givenWordTotal('sztos'), self.givenWordTotal('mega'),
+             self.givenWordTotal('świetn'), self.givenWordTotal('zajebi')]
+        return plt.pie(y, labels=x)
 
 
 class ConversationPeopleShow(AnalConversation, GeneralInfo, PlotShow):
@@ -140,23 +156,10 @@ class ConversationPeopleShow(AnalConversation, GeneralInfo, PlotShow):
         xLabel = "Najwięcej pytań od {}: {}"
         self.showPlot(self.mostQuestionGiver(), title, xLabel)
 
-    def mostWyspaGiverShow(self):
-        title = 'Ilość napisanych "wyspa" na wszystkie {} "wyspa"'.format(self.wyspaTotal())
-        xLabel = 'Najwięcej "wyspa" pisze {}: {}'
-        self.showPlot(self.mostWyspaGiver(), title, xLabel)
-
-    def mostKurwaGiverShow(self):
-        title = 'Ilość napisanych "kurwa" na wszystkie {} "kurwa"'.format(self.kurwaTotal())
-        xLabel = 'Najwięcej "kurwa" pisze {}: {}'
-        self.showPlot(self.mostKurwaGiver(), title, xLabel)
-
-    def mostTopWordGiverShow(self):
-        topWord_topWordAmount = self.topWordTotal()
-        topWord, topWordAmount = topWord_topWordAmount
-        title = 'Ilość napisanych "{top}" na wszystkie {num} "{top}"'.format(top=topWord, num=topWordAmount)
-        xLabel = 'Najwięcej od {}: {}'
-        print(topWord, topWordAmount)
-        self.showPlot(self.mostTopWordGiver(topWord), title, xLabel)
+    def mostOmgGiverShow(self):
+        title = 'Ilość napisanych "omg" na wszystkie {} "omg"'.format(self.omgTotal())
+        xLabel = 'Najwięcej "omg" pisze {}: {}'
+        self.showPlot(self.mostOmgGiver(), title, xLabel)
 
     def mostGivenWordGiverShow(self, word):
         title = 'Ilość napisanych "{}"'.format(word)
@@ -219,11 +222,6 @@ class ConversationPeopleShow(AnalConversation, GeneralInfo, PlotShow):
             format(self.onlyQuestionTotal())
         xLabel = 'Najwięcej samych "?" od {}: {}'
         self.showPlot(self.mostOnlyQuestionGiver(), title, xLabel)
-
-    def mostWordUsageShow(self):
-        title = "Najczęściej używane słowa na konwersacji"
-        xLabel = 'Najczęściej używane "{}": {}'
-        self.showPlot(self.mostWordUsage(), title, xLabel)
 
 
 class Show(ConversationPeopleShow, GeneralShow):

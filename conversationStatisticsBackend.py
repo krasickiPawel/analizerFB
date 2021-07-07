@@ -96,11 +96,11 @@ class GeneralInfo(ConversationOperationTemplates):
     def questionsTotal(self):
         return self.contentTotal("?")
 
-    def kurwaTotal(self):
-        return self.contentTotal("kurwa")
+    def omgTotal(self):
+        return self.contentTotal("omg")
 
     def wyspaTotal(self):
-        return self.contentTotal("wyspa") + self.contentTotal("wyspe") + self.contentTotal("wyspę")
+        return self.contentTotal("wysp")
 
     def givenWordTotal(self, word):   # np Patron
         return self.contentTotal(word)
@@ -136,14 +136,6 @@ class GeneralInfo(ConversationOperationTemplates):
     def charTotal(self):
         return sum([len(message.get("content")) for message in self.conversationInfo.messages
                     if message.get("content") is not None])
-
-    def topWordTotal(self):
-        wordList = []
-        for content in self.contentList():
-            for word in list(content.split()):
-                wordList.append(word)
-        maxWord = max(wordList)
-        return maxWord, wordList.count(maxWord)
 
     def onlyQuestionTotal(self):
         return len([None for message in self.conversationInfo.messages if message.get("content") is not None and
@@ -240,14 +232,8 @@ class AnalConversation(ConversationOperationTemplates):
     def leastQuestionGiver(self):
         return self.leastContentGiver("?")
 
-    def mostWyspaGiver(self):
-        return self.mostContentGiver("wyspa")
-
-    def mostKurwaGiver(self):
-        return self.mostContentGiver("kurwa")
-
-    def mostTopWordGiver(self, topWord):
-        return self.mostContentGiver(topWord)
+    def mostOmgGiver(self):
+        return self.mostContentGiver("omg")
 
     def mostGivenWordGiver(self, word):
         return self.mostContentGiver(word)
@@ -294,11 +280,3 @@ class AnalConversation(ConversationOperationTemplates):
                              self.conversationInfo.messages if message.get("content") is not None and
                              message.get("content")[0] == "?"]
         return self.sortDict(self.prepareDict(onlyQuestionMarks))
-
-    def mostWordUsage(self):   # counter koniecznie zliczający listę wszystkich moich słów
-        wordList = []
-        for messageDict in self.conversationInfo.messages:
-            if messageDict.get("content") is not None:
-                for word in messageDict.get("content").split():
-                    wordList.append((word, 1))
-        return self.sortDict(self.prepareDict(wordList))

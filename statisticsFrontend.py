@@ -211,36 +211,20 @@ class ComparePeopleShow(Total, ComparePeople, PlotShow):
         xLabel = 'Najwięcej "XD" z {}: {}'
         self.showPlot(self.compareXDAmount(), title, xLabel)
 
-    def compareLoveAmountShow(self):
-        title = 'Ilość "Kocham cię" z daną osobą z {} wszystkich "Kocham cię"'.format(self.loveTotal())
-        xLabel = 'Najwięcej "Kocham Cię" z {}: {}'
-        self.showPlot(self.compareLoveAmount(), title, xLabel)
-
-    def compareKurwaAmountShow(self):
-        title = 'Ilość "Kurwa" z daną osobą z {} wszystkich "Kurwa"'.format(self.kurwaTotal())
-        xLabel = 'Najwięcej "Kurwa" z {}: {}'
-        self.showPlot(self.compareKurwaAmount(), title, xLabel)
-
     def compareHahaWordAmountShow(self):
         title = 'Ilość napisanych "haha" z daną osobą z {} wszystkich "haha"'.format(self.hahaWordTotal())
         xLabel = 'Najwięcej tekstowych "haha" z {}: {}'
         self.showPlot(self.compareHahaWordAmount(), title, xLabel)
-
-    def compareJaPierdoleAmountShow(self):
-        title = 'Ilość "ja pierdole" z daną osobą z {} wszystkich "ja pierdole"'.format(self.jaPierdoleTotal())
-        xLabel = 'Najwięcej tekstowych "haha" z {}: {}'
-        self.showPlot(self.compareJaPierdoleAmount(), title, xLabel)
 
     def compareGivenWordAmountShow(self, word=""):
         title = 'Ilość "{}" z daną osobą'.format(word)
         xLabel = 'Najwięcej "{word1}" z {blank1}: {blank2}'.format(word1=word, blank1='{}', blank2='{}')
         self.showPlot(self.compareGivenWordAmount(word), title, xLabel)
 
-    def compareTopWordAmountShow(self):
-        topWord, topWordAmount = self.topWordTotal()
-        title = 'Ilość "{}" z daną osobą z {} wszystkich "{}"'.format(topWord, topWordAmount, topWord)
-        xLabel = 'Najwięcej "{word1}" z {blank1}: {blank2}'.format(word1=topWord, blank1='{}', blank2='{}')
-        self.showPlot(self.compareTopWordAmount(topWord), title, xLabel)
+    def compareOmgAmountShow(self):
+        title = 'Ilość napisanych "omg" z daną osobą z {} wszystkich "omg"'.format(self.omgTotal())
+        xLabel = 'Najwięcej "omg" z {}: {}'
+        self.showPlot(self.compareOmgAmountShow(), title, xLabel)
 
     def compareHeartsAmountShow(self):
         title = 'Wysłanych serduszek z daną osobą z wszystkich {} serduszek'.format(self.heartsTotal())

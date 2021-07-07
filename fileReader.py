@@ -64,6 +64,3 @@ def multiDirectoryRead(inbox, window, pathVariable, bar, results):
         window.update_idletasks()
     window.quit()
     results[0] = cil
-
-
-# xd = 'C:\\Users/**/Documents/AnalFB/inbox/'

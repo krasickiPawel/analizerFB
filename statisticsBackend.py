@@ -151,19 +151,6 @@ class Total(TotalOperationTemplates):
                     total += 1
         return total
 
-    def topWordTotal(self):     # front
-        wordList = []
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("content") is not None:
-                    for word in messageDict.get("content").split():
-                        wordList.append(word)
-        if len(wordList) > 0:
-            maxWord = max(wordList)
-            return maxWord, wordList.count(maxWord)
-        else:
-            return 0, 0
-
     def questionsToAllPercent(self):
         return int(100 * (self.questionsTotal() / self.messengerSentTotal())) if self.messengerSentTotal() > 0 else 0
 
@@ -218,17 +205,8 @@ class Total(TotalOperationTemplates):
     def omgTotal(self):
         return self.contentTemplate("omg")
 
-    def loveTotal(self):
-        return self.contentTemplate("kocham c")
-
-    def kurwaTotal(self):
-        return self.contentTemplate("kurwa")
-
     def givenWordTotal(self, word):
         return self.contentTemplate(word)
-
-    def jaPierdoleTotal(self):
-        return self.contentTemplate("ja pierdol") + self.contentTemplate("japierdol")
 
     def hahaWordTotal(self):
         return self.contentTemplate("haha")
@@ -297,27 +275,8 @@ class Total(TotalOperationTemplates):
     def myOmgTotal(self, name):
         return self.myContentTemplate("omg", name)
 
-    def myLoveTotal(self, name):
-        return self.myContentTemplate("kocham c", name)
-
-    def myKurwaTotal(self, name):
-        return self.myContentTemplate("kurwa", name)
-
-    def myJaPierdoleTotal(self, name):
-        return self.myContentTemplate("ja pierdol", name) + self.myContentTemplate("japierdol", name)
-
     def myGivenWordTotal(self, word, name):
         return self.myContentTemplate(word, name)
-
-    def myTopWordTotal(self, name):     # front
-        wordList = []
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("content") is not None and messageDict.get("sender_name") == name:
-                    for word in messageDict.get("content").split():
-                        wordList.append(word)
-        maxWord = max(wordList)
-        return maxWord, wordList.count(maxWord)
 
     def myQuestionsToAllPercent(self, name):
         return int(100 * (self.myQuestionsTotal(name) / self.mySentTotal(name))) if self.mySentTotal() > 0 else 0
@@ -381,20 +340,11 @@ class ComparePeople(ComparePeopleOperationTemplates):
     def compareXDAmount(self):
         return self.compareWordAmount("xd")
 
-    def compareLoveAmount(self):
-        return self.compareWordAmount("kocham c")
-
     def compareHahaWordAmount(self):
         return self.compareWordAmount("haha")
 
-    def compareKurwaAmount(self):
-        return self.compareWordAmount("kurwa")
-
-    def compareJaPierdoleAmount(self):
-        return self.compareWordAmount("ja pierdol")
-
-    def compareTopWordAmount(self, topWord):    # front
-        return self.compareWordAmount(topWord)
+    def compareOmgAmount(self):
+        return self.compareWordAmount("omg")
 
     def compareGivenWordAmount(self, word=""):
         return self.compareWordAmount(word)
