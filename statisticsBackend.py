@@ -199,6 +199,9 @@ class Total(TotalOperationTemplates):
     def xdTotal(self):
         return self.contentTemplate("xd")
 
+    def loveTotal(self):
+        return self.contentTemplate('❤') + self.contentTemplate('💕')
+
     def questionsTotal(self):
         return self.contentTemplate("?")
 
@@ -345,6 +348,15 @@ class ComparePeople(ComparePeopleOperationTemplates):
 
     def compareOmgAmount(self):
         return self.compareWordAmount("omg")
+
+    def compareLoveAmount(self):
+        loveAmount = []
+        for conversation in self.peopleConversationList.conversations:
+            for messageDict in conversation.messages:
+                if messageDict.get("content") is not None and (messageDict.get("content").__contains__('❤') or
+                                                               messageDict.get("content").__contains__('💕')):
+                    loveAmount.append((conversation.title, 1))
+        return self.sortDict(self.prepareDict(loveAmount))
 
     def compareGivenWordAmount(self, word=""):
         return self.compareWordAmount(word)

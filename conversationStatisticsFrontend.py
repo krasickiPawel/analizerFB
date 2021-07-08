@@ -140,6 +140,11 @@ class ConversationPeopleShow(AnalConversation, GeneralInfo, PlotShow):
         xLabel = "Najwięcej razy w klawiaturę uderzył {}: {}"
         self.showPlot(self.mostCharWriten(), title, xLabel)
 
+    def mostLoveShow(self):
+        title = 'Wysłane serduszka z wszystkich {} wiadomości zawierających serduszka'.format(self.heartsWritenTotal())
+        xLabel = 'Najwięcej serduszek w wiadomości (nie reakcji) od {}: {}'
+        self.showPlot(self.mostLove(), title, xLabel)
+
     def mostXDSentShow(self):
         title = 'Wysłane "XD" z wszystkich {} wiadomości zawierających "XD"'.format(self.xdConversationTotal())
         xLabel = 'Najwięcej "xD" od {}: {}'

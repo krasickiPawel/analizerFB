@@ -99,8 +99,8 @@ class GeneralInfo(ConversationOperationTemplates):
     def omgTotal(self):
         return self.contentTotal("omg")
 
-    def wyspaTotal(self):
-        return self.contentTotal("wysp")
+    def heartsWritenTotal(self):
+        return self.contentTotal('❤') + self.contentTotal('💕')
 
     def givenWordTotal(self, word):   # np Patron
         return self.contentTotal(word)
@@ -222,6 +222,13 @@ class AnalConversation(ConversationOperationTemplates):
 
     def mostXDSent(self):
         return self.mostContentGiver("xd")
+
+    def mostLove(self):
+        wordMessageSenders = [(message.get("sender_name"), 1) for message in
+                              self.conversationInfo.messages if message.get("content") is not None and
+                              (message.get("content").lower().__contains__('❤') or
+                               message.get("content").lower().__contains__('💕'))]
+        return self.sortDict(self.prepareDict(wordMessageSenders))
 
     def leastXDSent(self):
         return self.leastContentGiver("xd")
