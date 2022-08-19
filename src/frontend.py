@@ -6,7 +6,7 @@ from fileReader import multiDirectoryRead, directoryRead
 from threading import Thread
 
 
-class Main:
+class FrontendWindow:
     def __init__(self):
         self.fileLoadingWindow = None
         self.statisticsWindow = None

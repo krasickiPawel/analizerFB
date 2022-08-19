@@ -1,4 +1,4 @@
-from frontend import Main
+from frontend import FrontendWindow
 import sys
 import os
 
@@ -10,5 +10,5 @@ if __name__ == '__main__':
         return os.path.join(os.path.abspath("."), relative_path)
 
     resource_path("analFB logo.png")
-    main = Main()
+    main = FrontendWindow()
     main.run()
