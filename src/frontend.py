@@ -92,7 +92,7 @@ class Main:
             activeLabel.pack_forget()
 
         def myGeneral():
-            if entry.get() is not "":
+            if entry.get() != "":
                 activeLabel.pack(pady=5)
                 entry.configure(fg="green")
                 window.update_idletasks()
@@ -122,7 +122,7 @@ class Main:
             activeLabel.pack_forget()
 
         def aboutMe():
-            if entry.get() is not "":
+            if entry.get() != "":
                 activeLabel.pack(pady=5)
                 name = entry.get()
                 entry.configure(fg="green")
@@ -135,7 +135,7 @@ class Main:
 
         def analWordWindow():
             def analWord():
-                if entryWord.get() is not "":
+                if entryWord.get() != "":
                     activeWordLabel.pack(pady=5)
                     entryWord.configure(fg="green")
                     wordWindow.update_idletasks()
@@ -230,7 +230,7 @@ class Main:
 
         def analConvGivenWord():
             def analWord():
-                if entryWord.get() is not "":
+                if entryWord.get() != "":
                     activeWordLabel.pack(pady=5)
                     entryWord.configure(fg="green")
                     wordWindow.update_idletasks()
