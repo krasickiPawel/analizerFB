@@ -34,7 +34,7 @@ class MyTotalShow(Total, PlotShow):
     def __init__(self, peopleConversationList):
         super().__init__(peopleConversationList)
 
-    def myGeneralInfoShow(self, name):
+    def my_general_info_show(self, name):
         plt.figure(figsize=(8, 5))
         plt.suptitle('Statystyki tego co {} napisał(a) na całym messengerze'.format(name))
         messagesNumber = "{} wiadomości \n".format(self.mySentTotal(name))
@@ -186,42 +186,42 @@ class ComparePeopleShow(Total, ComparePeople, PlotShow):
     def __init__(self, peopleConversationList):
         super().__init__(peopleConversationList)
 
-    def compareMessageAmountShow(self):
+    def compare_message_amount_show(self):
         title = "Ilość wiadomości z daną osobą z {} wszystkich wiadomości".format(self.messengerSentTotal())
         xLabel = "Najwięcej wiadomości z {}: {}"
         self.showPlot(self.compareMessageAmount(), title, xLabel)
 
-    def compareMultimediaAmountShow(self):
+    def compare_multimedia_amount_show(self):
         title = "Ilość zjęć i filmików z daną osobą z {} wszystkich multimediów".format(self.multimediaTotal())
         xLabel = "Najwięcej zdjęć i filmików z {}: {}"
         self.showPlot(self.compareMultimediaAmount(), title, xLabel)
 
-    def comparePhotoAmountShow(self):
+    def compare_photo_amount_show(self):
         title = "Ilość zdjęć z daną osobą z {} wszystkich zdjęć".format(self.photoTotal())
         xLabel = "Najwięcej zdjęć z {}: {}"
         self.showPlot(self.comparePhotoAmount(), title, xLabel)
 
-    def compareVideoAmountShow(self):
+    def compare_video_amount_show(self):
         title = "Ilość filmików z daną osobą z {} wszystkich filmików".format(self.videoTotal())
         xLabel = "Najwięcej zdjęć z {}: {}"
         self.showPlot(self.compareVideoAmount(), title, xLabel)
 
-    def compareXDAmountShow(self):
+    def compare_xd_amount_show(self):
         title = 'Ilość "XD" z daną osobą z {} wszystkich "XD"'.format(self.xdTotal())
         xLabel = 'Najwięcej "XD" z {}: {}'
         self.showPlot(self.compareXDAmount(), title, xLabel)
 
-    def compareHahaWordAmountShow(self):
+    def compare_haha_word_amount_show(self):
         title = 'Ilość napisanych "haha" z daną osobą z {} wszystkich "haha"'.format(self.hahaWordTotal())
         xLabel = 'Najwięcej tekstowych "haha" z {}: {}'
         self.showPlot(self.compareHahaWordAmount(), title, xLabel)
 
-    def compareGivenWordAmountShow(self, word=""):
+    def compare_given_word_amount_show(self, word=""):
         title = 'Ilość "{}" z daną osobą'.format(word)
         xLabel = 'Najwięcej "{word1}" z {blank1}: {blank2}'.format(word1=word, blank1='{}', blank2='{}')
         self.showPlot(self.compareGivenWordAmount(word), title, xLabel)
 
-    def compareLoveAmountShow(self):
+    def compare_love_amount_show(self):
         title = 'Ilość wysłanych serduszek (nie reakcji) z daną osobą z {} wszystkich serduszek'.format(self.loveTotal())
         xLabel = 'Najwięcej wysłanych wiadomości z serduszkami z {}: {}'
         self.showPlot(self.compareLoveAmount(), title, xLabel)
@@ -231,27 +231,27 @@ class ComparePeopleShow(Total, ComparePeople, PlotShow):
         xLabel = 'Najwięcej "omg" z {}: {}'
         self.showPlot(self.compareOmgAmount(), title, xLabel)
 
-    def compareHeartsAmountShow(self):
+    def compare_hearts_amount_show(self):
         title = 'Wysłanych serduszek z daną osobą z wszystkich {} serduszek'.format(self.heartsTotal())
         xLabel = 'Najwięcej serduszek z {}: {}'
         self.showPlot(self.compareHeartsAmount(), title, xLabel)
 
-    def compareHahaAmountShow(self):
+    def compare_haha_amount_show(self):
         title = 'Wysłanych emotek "haha" z daną osobą z wszystkich {} emotek"haha"'.format(self.hahaTotal())
         xLabel = 'Najwięcej "haha" z {}: {}'
         self.showPlot(self.compareHahaAmount(), title, xLabel)
 
-    def compareWowAmountShow(self):
+    def compare_wow_amount_show(self):
         title = 'Wysłanych "wow" z daną osobą z wszystkich {} "wow"'.format(self.wowTotal())
         xLabel = 'Najwięcej "wow" z {}: {}'
         self.showPlot(self.compareWowAmount(), title, xLabel)
 
-    def compareLikesAmountShow(self):
+    def compare_likes_amount_show(self):
         title = 'Wysłanych lajków z daną osobą z wszystkich {} lajków'.format(self.thumbsTotal())
         xLabel = 'Najwięcej lajków z {}: {}'
         self.showPlot(self.compareLikesAmount(), title, xLabel)
 
-    def compareEyesAmountShow(self):
+    def compare_eyes_amount_show(self):
         title = 'Wysłanych serduszek w oczach z daną osobą z wszystkich {} buziek z serduszkami w oczach'.format(
             self.eyeHeartsTotal())
         xLabel = 'Najwięcej serduszek w oczach z {}: {}'

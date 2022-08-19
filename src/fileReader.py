@@ -51,7 +51,7 @@ def directoryRead(dirName):
         return None
 
 
-def multiDirectoryRead(inbox, window, pathVariable, bar, results):
+def multi_directory_read(inbox, window, pathVariable, bar, results):
     dirs = glob.glob(inbox + '/**')
     cil = ConversationInfoList()
     for dirName in dirs:

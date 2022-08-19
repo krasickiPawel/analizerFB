@@ -7,7 +7,7 @@ class GeneralShow(GeneralInfo, PlotShow):
     def __init__(self, conversationInfo):
         super().__init__(conversationInfo)
 
-    def generalInfoShow(self):
+    def general_info_show(self):
         plt.figure(figsize=(8, 5))
         plt.suptitle(self.conversationInfo.title)
         messagesNumber = "{} - {} wiadomości \n".format(self.conversationInfo.title, self.messagesTotal())
@@ -35,7 +35,7 @@ class GeneralShow(GeneralInfo, PlotShow):
                     + thumbsTotal + eyesTotal + questionsPercent + xdToAllPercent)
         plt.show()
 
-    def pieShow(self):
+    def pie_show(self):
         plt.figure(figsize=(12, 6.5))
         plt.suptitle(self.conversationInfo.title)
         plt.subplot(3, 2, 1)
@@ -89,140 +89,140 @@ class ConversationPeopleShow(AnalConversation, GeneralInfo, PlotShow):
     def __init__(self, conversationInfo):
         super().__init__(conversationInfo)
 
-    def mostMessagesSentShow(self):
+    def most_messages_sent_show(self):
         title = "Ilość wiadomości wysłana przez danego użytkownika z {} wszystkich wiadomości".format(
             len(self.conversationInfo.messages))
         xLabel = "Najwięcej wiadomosci od {}: {}"
         self.showPlot(self.mostMessagesSent(), title, xLabel)
 
-    def mostReactionsReceiverShow(self):
+    def most_reactions_receiver_show(self):
         title = "Otrzymane reakcje z {} wszystkich reakcji".format(self.reactionTotal())
         xLabel = "Najwięcej reakcji otrzymał {}: {}"
         self.showPlot(self.mostReactionReceiver(), title, xLabel)
 
-    def mostReactionsGiverShow(self):
+    def most_reactions_giver_show(self):
         title = "Dane reakcje z {} wszystkich reakcji".format(self.reactionTotal())
         xLabel = "Najwięcej reakcji dał {}: {}"
         self.showPlot(self.mostReactionGiver(), title, xLabel)
 
-    def mostPhotoSentShow(self):
+    def most_photo_sent_show(self):
         title = "Wysłane zdjęcia z {} wszystkich zdjęć".format(self.photoTotal())
         xLabel = "Najwięcej zdjęć wysłał {}: {}"
         self.showPlot(self.mostPhotoSent(), title, xLabel)
 
-    def mostVideoSentShow(self):
+    def most_video_sent_show(self):
         title = "Wysłane filmiki z {} wszystkich filmików".format(self.videoTotal())
         xLabel = "Najwięcej filmików wysłał {}: {}"
         self.showPlot(self.mostVideoSent(), title, xLabel)
 
-    def mostMultimediaSentShow(self):
+    def most_multimedia_sent_show(self):
         title = "Wysłane multimedia z {} wszystkich multimediów".format(self.multimediaTotal())
         xLabel = "Najwięcej zdjęć i filmików wysłał {}: {}"
         self.showPlot(self.mostMultimediaSent(), title, xLabel)
 
-    def mostMultimediaReactionsReceiverShow(self):
+    def most_multimedia_reactions_receiver_show(self):
         title = "Otrzymane reakcje z {} reakcji za zdjęcia i filmiki".format(self.multimediaReactionsTotal())
         xLabel = "Najwięcej reakcji dotyczących multimediów otrzymał {}: {}"
         self.showPlot(self.mostMultimediaReactionsReceiver(), title, xLabel)
 
-    def mostMultimediaReactionsGiverShow(self):
+    def most_multimedia_reactions_giver_show(self):
         title = "Dane reakcje z {} wszystkich reakcji dla multimediów".format(self.reactionTotal())
         xLabel = "Najwięcej reakcji dla zdjęć i filmików od {}: {}"
         self.showPlot(self.mostMultimediaReactionsGiver(), title, xLabel)
 
-    def personMessageLengthShow(self):
+    def person_message_length_show(self):
         title = "Średnia długość wiadomości na osobę - ogólna średnia: {} znaków".format(self.avgMessageLength())
         xLabel = "Najdłuższe wiadomości pisze {}: {} znaków średnio"
         self.showPlot(self.mostPersonMessageLength(), title, xLabel)
 
-    def charWritenShow(self):
+    def char_writen_show(self):
         title = "Napisanych pojedynczych znaków z {} wszystkich znaków na konfie".format(self.charTotal())
         xLabel = "Najwięcej razy w klawiaturę uderzył {}: {}"
         self.showPlot(self.mostCharWriten(), title, xLabel)
 
-    def mostLoveShow(self):
+    def most_love_show(self):
         title = 'Wysłane serduszka z wszystkich {} wiadomości zawierających serduszka'.format(self.heartsWritenTotal())
         xLabel = 'Najwięcej serduszek w wiadomości (nie reakcji) od {}: {}'
         self.showPlot(self.mostLove(), title, xLabel)
 
-    def mostXDSentShow(self):
+    def most_xd_sent_show(self):
         title = 'Wysłane "XD" z wszystkich {} wiadomości zawierających "XD"'.format(self.xdConversationTotal())
         xLabel = 'Najwięcej "xD" od {}: {}'
         self.showPlot(self.mostXDSent(), title, xLabel)
 
-    def leastXDSendShow(self):
+    def leas_xd_sent_show(self):
         title = 'Wysłane wiadomości bez "XD" z wszystkich {} wiadomości bez "XD"'.format(self.messagesTotal() -
                                                                                          self.xdConversationTotal())
         xLabel = 'Najwięcej wiadomości bez "xD" od {}: {}'
         self.showPlot(self.leastXDSent(), title, xLabel)
 
-    def mostQuestionGiverShow(self):
+    def most_question_giver_show(self):
         title = "Zadane pytania na wszystkie {} pytań".format(self.questionsTotal())
         xLabel = "Najwięcej pytań od {}: {}"
         self.showPlot(self.mostQuestionGiver(), title, xLabel)
 
-    def mostOmgGiverShow(self):
+    def most_omg_giver_show(self):
         title = 'Ilość napisanych "omg" na wszystkie {} "omg"'.format(self.omgTotal())
         xLabel = 'Najwięcej "omg" pisze {}: {}'
         self.showPlot(self.mostOmgGiver(), title, xLabel)
 
-    def mostGivenWordGiverShow(self, word):
+    def most_given_word_giver_show(self, word):
         title = 'Ilość napisanych "{}"'.format(word)
         xLabel = 'Najwięcej od {}: {}'
         self.showPlot(self.mostGivenWordGiver(word), title, xLabel)
 
-    def leastQuestionGiverShow(self):
+    def least_question_giver_show(self):
         title = "Wiadomości bez pytań na wszystkie {} wiadomości nie będące pytaniami".format(self.messagesTotal() -
                                                                                               self.questionsTotal())
         xLabel = "Najwięcej wiadomości nie będącymi pytaniami od {}: {}"
         self.showPlot(self.leastQuestionGiver(), title, xLabel)
 
-    def mostUnsentGiverShow(self):
+    def most_unsent_giver_show(self):
         title = 'Usuniętych wiadomości na wszystkie {} usunięte'.format(self.unsentTotal())
         xLabel = "Najwięcej usuniętych przez {}: {}"
         self.showPlot(self.mostUnsentGiver(), title, xLabel)
 
-    def mostHeartsGiverShow(self):
+    def most_hearts_giver_show(self):
         title = "Danych serduszek na wszystkie {} serduszka".format(self.heartsTotal())
         xLabel = "Najwięcej serduszek od {}: {}"
         self.showPlot(self.mostHeartsGiver(), title, xLabel)
 
-    def mostHeartsReceiverShow(self):
+    def most_hearts_receiver_show(self):
         title = "Otrzymanych serduszek na wszystkie {} serduszka".format(self.heartsTotal())
         xLabel = "Najwiecej serduszek dostał(a) {}: {}"
         self.showPlot(self.mostHeartsReceiver(), title, xLabel)
 
-    def mostHahaGiverShow(self):
+    def most_haha_giver_show(self):
         title = 'Danych buziek śmiechu na wszystkie {} reakcje "haha"'.format(self.hahaTotal())
         xLabel = 'Najwięcej reakcji "haha" od {}: {}'
         self.showPlot(self.mostHahaGiver(), title, xLabel)
 
-    def mostHahaReceiverShow(self):
+    def most_haha_receiver_show(self):
         title = 'Otrzymanych buziek śmiechu na wszystkie {} reakcje "haha"'.format(self.hahaTotal())
         xLabel = 'Najwiecej reakcji "haha" dostał(a) {}: {}'
         self.showPlot(self.mostHahaReceiver(), title, xLabel)
 
-    def receivedToGivenReactionsShow(self):
+    def received_to_given_reactions_show(self):
         title = '% otrzymanych reakcji względem wszystkich swoich reakcji (danych i otrzymanych)'
         xLabel = 'Stosunek reakcji otrzymanych do danych wygrywa {}: {}% otrzymanych reakcji'
         self.showPlot(self.receivedToGivenReactions(), title, xLabel)
 
-    def receivedToGivenHeartsShow(self):
+    def received_to_given_hearts_show(self):
         title = '% otrzymanych serduszek względem wszystkich swoich serduszek (danych i otrzymanych)'
         xLabel = 'Stosunek serduszek otrzymanych do danych wygrywa {}: {}% otrzymanych serduszek'
         self.showPlot(self.receivedToGivenHearts(), title, xLabel)
 
-    def questionsToAnswersPerPersonShow(self):
+    def questions_to_answers_per_person_show(self):
         title = '% zadanych pytań względem wszystkich wysłanych przez siebie wiadomości'
         xLabel = 'Największy stosunek pytań do wszystkich swoich wiadomości ma {}: {}% pytań'
         self.showPlot(self.questionsToAnswersPerPerson(), title, xLabel)
 
-    def xdToNoXDPerPersonShow(self):
+    def xd_to_no_xd_per_person_show(self):
         title = '% wysłanych "XD" względem wszystkich wysłanych przez siebie wiadomości'
         xLabel = 'Największy stosunek "XD" do wszystkich swoich wiadomości ma {}: {}% "XD"'
         self.showPlot(self.xdToNoXDPerPerson(), title, xLabel)
 
-    def mostOnlyQuestionGiverShow(self):
+    def most_only_question_giver_show(self):
         title = 'Wysłane "?" z wszystkich {} wiadomości będących tylko znakami zapytania'.\
             format(self.onlyQuestionTotal())
         xLabel = 'Najwięcej samych "?" od {}: {}'
