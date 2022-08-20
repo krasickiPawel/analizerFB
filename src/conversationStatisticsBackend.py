@@ -24,26 +24,26 @@ class ConversationOperationTemplates(OperationTemplates):
                 if reactions.get("reaction").__contains__(reaction1) or reactions.get("reaction").__contains__(
                         reaction2):
                     namesHeartReactionsList.append((reactions.get("actor"), 1))
-        return self.sortDict(self.prepareDict(namesHeartReactionsList))
+        return self.sort_dict(self.prepare_dict(namesHeartReactionsList))
 
     def mostSpecificReactionReceiver(self, reaction1, reaction2="brak reakcji"):
         namesReactionsList = [(message.get("sender_name"), len([reaction for reaction in message.get("reactions") if
                                                                 (reaction.get("reaction").__contains__(reaction1) or
                                                                  reaction.get("reaction").__contains__(reaction2))]))
                               for message in self.conversationInfo.messages if message.get("reactions") is not None]
-        return self.sortDict(self.prepareDict(namesReactionsList))
+        return self.sort_dict(self.prepare_dict(namesReactionsList))
 
     def mostContentGiver(self, word=""):
         wordMessageSenders = [(message.get("sender_name"), 1) for message in
                               self.conversationInfo.messages if message.get("content") is not None and
                               message.get("content").lower().__contains__(word)]
-        return self.sortDict(self.prepareDict(wordMessageSenders))
+        return self.sort_dict(self.prepare_dict(wordMessageSenders))
 
     def leastContentGiver(self, word=""):
         wordMessageSenders = [(message.get("sender_name"), 1) for message in
                               self.conversationInfo.messages if message.get("content") is None or not
                               message.get("content").lower().__contains__(word)]
-        return self.sortDict(self.prepareDict(wordMessageSenders))
+        return self.sort_dict(self.prepare_dict(wordMessageSenders))
 
     def contentTotal(self, word=""):
         return len([message.get("content") for message in self.conversationInfo.messages
@@ -157,12 +157,12 @@ class AnalConversation(ConversationOperationTemplates):
 
     def mostMessagesSent(self):
         namesAmount = [(message.get("sender_name"), 1) for message in self.conversationInfo.messages]
-        return self.sortDict(self.prepareDict(namesAmount))
+        return self.sort_dict(self.prepare_dict(namesAmount))
 
     def mostReactionReceiver(self):
         namesReactionsList = [(message.get("sender_name"), len(message.get("reactions"))) for message
                               in self.conversationInfo.messages if message.get("reactions") is not None]
-        return self.sortDict(self.prepareDict(namesReactionsList))
+        return self.sort_dict(self.prepare_dict(namesReactionsList))
 
     def mostReactionGiver(self):
         reactionsListList = [message.get("reactions") for message in self.conversationInfo.messages
@@ -171,17 +171,17 @@ class AnalConversation(ConversationOperationTemplates):
         for reactionsList in reactionsListList:
             for reactions in reactionsList:
                 namesReactionsList.append((reactions.get("actor"), 1))
-        return self.sortDict(self.prepareDict(namesReactionsList))
+        return self.sort_dict(self.prepare_dict(namesReactionsList))
 
     def mostPhotoSent(self):
         namesPhotosList = [(message.get("sender_name"), len(message.get("photos"))) for message in
                            self.conversationInfo.messages if message.get("photos") is not None]
-        return self.sortDict(self.prepareDict(namesPhotosList))
+        return self.sort_dict(self.prepare_dict(namesPhotosList))
 
     def mostVideoSent(self):
         namesVideosList = [(message.get("sender_name"), len(message.get("videos"))) for message
                            in self.conversationInfo.messages if message.get("videos") is not None]
-        return self.sortDict(self.prepareDict(namesVideosList))
+        return self.sort_dict(self.prepare_dict(namesVideosList))
 
     def mostMultimediaSent(self):
         namesVideosList = [(message.get("sender_name"), len(message.get("videos"))) for message
@@ -189,13 +189,13 @@ class AnalConversation(ConversationOperationTemplates):
         namesPhotosList = [(message.get("sender_name"), len(message.get("photos"))) for message
                            in self.conversationInfo.messages if message.get("photos") is not None]
         namesVideosList.extend(namesPhotosList)
-        return self.sortDict(self.prepareDict(namesVideosList))
+        return self.sort_dict(self.prepare_dict(namesVideosList))
 
     def mostMultimediaReactionsReceiver(self):
         namesReactionsList = [(message.get("sender_name"), len(message.get("reactions"))) for message
                               in self.conversationInfo.messages if message.get("reactions") is not None and
                               (message.get("videos") is not None or message.get("photos") is not None)]
-        return self.sortDict(self.prepareDict(namesReactionsList))
+        return self.sort_dict(self.prepare_dict(namesReactionsList))
 
     def mostMultimediaReactionsGiver(self):
         reactionListList = [message.get("reactions") for message in self.conversationInfo.messages
@@ -205,12 +205,12 @@ class AnalConversation(ConversationOperationTemplates):
         for reactionList in reactionListList:
             for reaction in reactionList:
                 namesMultimediaReactionsList.append((reaction.get("actor"), 1))
-        return self.sortDict(self.prepareDict(namesMultimediaReactionsList))
+        return self.sort_dict(self.prepare_dict(namesMultimediaReactionsList))
 
     def mostCharWriten(self):
         namesLengthsList = [(message.get("sender_name"), len(message.get("content"))) for message in
                             self.conversationInfo.messages if message.get("content") is not None]
-        return self.sortDict(self.prepareDict(namesLengthsList))
+        return self.sort_dict(self.prepare_dict(namesLengthsList))
 
     def mostPersonMessageLength(self):
         messagesPerPerson = self.mostMessagesSent()
@@ -218,7 +218,7 @@ class AnalConversation(ConversationOperationTemplates):
         names = list(messagesPerPerson.keys())
         avgMsgLenPerPerson = [(name, int(charSentPerPerson.get(name)/messagesPerPerson.get(name))) for name in names
                               if charSentPerPerson.get(name) is not None and messagesPerPerson.get(name) is not None]
-        return self.sortDict(self.prepareDict(avgMsgLenPerPerson))
+        return self.sort_dict(self.prepare_dict(avgMsgLenPerPerson))
 
     def mostXDSent(self):
         return self.mostContentGiver("xd")
@@ -228,7 +228,7 @@ class AnalConversation(ConversationOperationTemplates):
                               self.conversationInfo.messages if message.get("content") is not None and
                               (message.get("content").lower().__contains__('❤') or
                                message.get("content").lower().__contains__('💕'))]
-        return self.sortDict(self.prepareDict(wordMessageSenders))
+        return self.sort_dict(self.prepare_dict(wordMessageSenders))
 
     def leastXDSent(self):
         return self.leastContentGiver("xd")
@@ -254,7 +254,7 @@ class AnalConversation(ConversationOperationTemplates):
     def mostUnsentGiver(self):
         unsentList = [(message.get("sender_name"), 1) for message in self.conversationInfo.messages
                       if message.get("is_unsent")]
-        return self.sortDict(self.prepareDict(unsentList))
+        return self.sort_dict(self.prepare_dict(unsentList))
 
     def mostHahaGiver(self):
         return self.mostSpecificReactionGiver('😂', '😆')
@@ -265,25 +265,25 @@ class AnalConversation(ConversationOperationTemplates):
     def receivedToGivenReactions(self):
         given = self.mostReactionGiver()
         received = self.mostReactionReceiver()
-        return self.receivedToReceivedPlusGivenInPercent(received, given)
+        return self.received_to_received_plus_given_in_percent(received, given)
 
     def receivedToGivenHearts(self):
         given = self.mostHeartsGiver()
         received = self.mostHeartsReceiver()
-        return self.receivedToReceivedPlusGivenInPercent(received, given)
+        return self.received_to_received_plus_given_in_percent(received, given)
 
     def questionsToAnswersPerPerson(self):
         questions = self.mostQuestionGiver()
         answers = self.leastQuestionGiver()
-        return self.receivedToReceivedPlusGivenInPercent(questions, answers)
+        return self.received_to_received_plus_given_in_percent(questions, answers)
 
     def xdToNoXDPerPerson(self):
         xd = self.mostXDSent()
         noXD = self.leastXDSent()
-        return self.receivedToReceivedPlusGivenInPercent(xd, noXD)
+        return self.received_to_received_plus_given_in_percent(xd, noXD)
 
     def mostOnlyQuestionGiver(self):
         onlyQuestionMarks = [(message.get("sender_name"), 1) for message in
                              self.conversationInfo.messages if message.get("content") is not None and
                              message.get("content")[0] == "?"]
-        return self.sortDict(self.prepareDict(onlyQuestionMarks))
+        return self.sort_dict(self.prepare_dict(onlyQuestionMarks))

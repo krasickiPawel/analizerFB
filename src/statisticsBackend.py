@@ -1,57 +1,57 @@
 class OperationTemplates:
     @staticmethod
-    def sortDict(unsortedDict):
-        sortedList = sorted(unsortedDict.items(), key=lambda x: x[1], reverse=True)[:40]
-        return {pair[0][:24]: pair[1] for pair in sortedList}
+    def sort_dict(unsorted_dict):
+        sorted_list = sorted(unsorted_dict.items(), key=lambda x: x[1], reverse=True)[:40]
+        return {pair[0][:24]: pair[1] for pair in sorted_list}
 
     @staticmethod
-    def prepareDict(tupleList):
+    def prepare_dict(tuple_list):
         listDict = {}
-        for name, amount in tupleList:
+        for name, amount in tuple_list:
             listDict.setdefault(name, []).append(amount)
         return {person: sum(listDict.get(person)) for person in listDict}
 
     @staticmethod
-    def receivedToReceivedPlusGivenInPercent(received, given):
+    def received_to_received_plus_given_in_percent(received, given):
         names = list(received.keys())
-        givenToReceived = [(name, int(100 * (received.get(name) / (received.get(name) + given.get(name))))) for name
-                           in names if given.get(name) is not None and received.get(name) is not None]
-        return OperationTemplates.sortDict(OperationTemplates.prepareDict(givenToReceived))
+        given_to_received = [(name, int(100 * (received.get(name) / (received.get(name) + given.get(name))))) for name
+                             in names if given.get(name) is not None and received.get(name) is not None]
+        return OperationTemplates.sort_dict(OperationTemplates.prepare_dict(given_to_received))
 
 
 class TotalOperationTemplates:
-    def __init__(self, peopleConversationList):
-        self.peopleConversationList = peopleConversationList
+    def __init__(self, people_conversation_list):
+        self.people_conversation_list = people_conversation_list
 
-    def photoVideoTemplate(self, photoVideo):   # podział na ogólne i moje ze względu większej wydajności
-        total = 0                               # (contains dla ogólnych się nie wykonuje wiec szybciej)
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get(photoVideo) is not None:
-                    total += len(messageDict.get(photoVideo))
+    def photo_video_template(self, photo_video):  # podział na ogólne i moje ze względu większej wydajności
+        total = 0  # (contains dla ogólnych się nie wykonuje wiec szybciej)
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get(photo_video) is not None:
+                    total += len(message_dict.get(photo_video))
         return total
 
-    def myPhotoVideoTemplate(self, photoVideo, name="Pawel Krasicki"):  # dodac funkcjonalnosc na wpisywanie imienia
+    def my_photo_video_template(self, photo_video, name="Pawel Krasicki"):  # dodac funkcjonalnosc na wpisywanie imienia
         total = 0
-        for conversation in self.peopleConversationList.conversations:
+        for conversation in self.people_conversation_list.conversations:
             for messageDict in conversation.messages:
-                if messageDict.get(photoVideo) is not None and messageDict.get("sender_name") == name:
-                    total += len(messageDict.get(photoVideo))
+                if messageDict.get(photo_video) is not None and messageDict.get("sender_name") == name:
+                    total += len(messageDict.get(photo_video))
         return total
 
-    def reactionsTemplate(self, r):
+    def reactions_template(self, r):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("reactions") is not None:
-                    for reaction in messageDict.get('reactions'):
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("reactions") is not None:
+                    for reaction in message_dict.get('reactions'):
                         if reaction.get("reaction").__contains__(r):
                             total += 1
         return total
 
-    def myReactionsGivenTemplate(self, r, name="Pawel Krasicki"):
+    def my_reactions_given_template(self, r, name="Pawel Krasicki"):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
+        for conversation in self.people_conversation_list.conversations:
             for messageDict in conversation.messages:
                 if messageDict.get("reactions") is not None:
                     for reaction in messageDict.get('reactions'):
@@ -59,9 +59,9 @@ class TotalOperationTemplates:
                             total += 1
         return total
 
-    def myReactionsReceivedTemplate(self, r, name="Pawel Krasicki"):
+    def my_reactions_received_template(self, r, name="Pawel Krasicki"):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
+        for conversation in self.people_conversation_list.conversations:
             for messageDict in conversation.messages:
                 if messageDict.get("reactions") is not None and messageDict.get("sender_name") == name:
                     for reaction in messageDict.get('reactions'):
@@ -69,17 +69,17 @@ class TotalOperationTemplates:
                             total += 1
         return total
 
-    def contentTemplate(self, word):
+    def content_template(self, word):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
+        for conversation in self.people_conversation_list.conversations:
             for messageDict in conversation.messages:
                 if messageDict.get("content") is not None and messageDict.get("content").lower().__contains__(word):
                     total += 1
         return total
 
-    def myContentTemplate(self, word, name="Pawel Krasicki"):
+    def my_content_template(self, word, name="Pawel Krasicki"):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
+        for conversation in self.people_conversation_list.conversations:
             for messageDict in conversation.messages:
                 if messageDict.get("content") is not None and messageDict.get("content").lower().__contains__(word) \
                         and messageDict.get("sender_name") == name:
@@ -88,304 +88,305 @@ class TotalOperationTemplates:
 
 
 class Total(TotalOperationTemplates):
-    def __init__(self, peopleConversationList):
-        super(Total, self).__init__(peopleConversationList)
+    def __init__(self, people_conversation_list):
+        super(Total, self).__init__(people_conversation_list)
 
-    def messengerSentTotal(self):
-        return sum([len(conversation.messages) for conversation in self.peopleConversationList.conversations])
+    def messenger_sent_total(self):
+        return sum([len(conversation.messages) for conversation in self.people_conversation_list.conversations])
 
-    def messengerTextMessagesSentTotal(self):
+    def messenger_text_messages_sent_total(self):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("content") is not None:
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("content") is not None:
                     total += 1
         return total
 
-    def myTextMessagesSentTotal(self, name="Pawel Krasicki"):
+    def my_text_messages_sent_total(self, name="Pawel Krasicki"):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("content") is not None and message_dict.get("sender_name") == name:
+                    total += 1
+        return total
+
+    def messenge_avg_message_len(self):
+        messages_len = []
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("content") is not None:
+                    messages_len.append(len(message_dict.get("content")))
+        return int(sum(messages_len) / len(messages_len)) if len(messages_len) > 0 else 0
+
+    def my_avg_message_len(self, name="Pawel Krasicki"):
+        messagesLen = []
+        for conversation in self.people_conversation_list.conversations:
             for messageDict in conversation.messages:
                 if messageDict.get("content") is not None and messageDict.get("sender_name") == name:
-                    total += 1
-        return total
-
-    def messengerAvgMessageLen(self):
-        messagesLen = []
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("content") is not None:
                     messagesLen.append(len(messageDict.get("content")))
         return int(sum(messagesLen) / len(messagesLen)) if len(messagesLen) > 0 else 0
 
-    def myAvgMessageLen(self, name="Pawel Krasicki"):
-        messagesLen = []
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("content") is not None and messageDict.get("sender_name") == name:
-                    messagesLen.append(len(messageDict.get("content")))
-        return int(sum(messagesLen) / len(messagesLen)) if len(messagesLen) > 0 else 0
-
-    def messengerReactionsTotal(self):
+    def messenger_reactions_total(self):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("reactions") is not None:
-                    total += len(messageDict.get("reactions"))
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("reactions") is not None:
+                    total += len(message_dict.get("reactions"))
         return total
 
-    def messengerUnsentTotal(self):
+    def messenger_unsent_total(self):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("is_unsent") is not None and messageDict.get("is_unsent"):
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("is_unsent") is not None and message_dict.get("is_unsent"):
                     total += 1
         return total
 
-    def myUnsentTotal(self, name="Pawel Krasicki"):
+    def my_unsent_total(self, name="Pawel Krasicki"):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("is_unsent") is not None and messageDict.get("is_unsent") and \
-                        messageDict.get("sender_name") == name:
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("is_unsent") is not None and message_dict.get("is_unsent") and \
+                        message_dict.get("sender_name") == name:
                     total += 1
         return total
 
-    def questionsToAllPercent(self):
-        return int(100 * (self.questionsTotal() / self.messengerSentTotal())) if self.messengerSentTotal() > 0 else 0
+    def questions_to_all_percent(self):
+        return int(
+            100 * (self.questions_total() / self.messenger_sent_total())) if self.messenger_sent_total() > 0 else 0
 
-    def xdToAllPercent(self):
-        return int(100 * (self.xdTotal() / self.messengerSentTotal())) if self.messengerSentTotal() > 0 else 0
+    def xd_to_all_percent(self):
+        return int(100 * (self.xd_total() / self.messenger_sent_total())) if self.messenger_sent_total() > 0 else 0
 
-    def photoTotal(self):
-        return self.photoVideoTemplate("photos")
+    def photo_total(self):
+        return self.photo_video_template("photos")
 
-    def videoTotal(self):
-        return self.photoVideoTemplate("videos")
+    def video_total(self):
+        return self.photo_video_template("videos")
 
-    def multimediaTotal(self):
-        return self.videoTotal() + self.photoTotal()
+    def multimedia_total(self):
+        return self.video_total() + self.photo_total()
 
-    def heartsTotal(self):
-        return self.reactionsTemplate('❤')
+    def hearts_total(self):
+        return self.reactions_template('❤')
 
-    def hahaTotal(self):
-        return self.reactionsTemplate('😆')
+    def haha_total(self):
+        return self.reactions_template('😆')
 
-    def wowTotal(self):
-        return self.reactionsTemplate('😮')
+    def wow_total(self):
+        return self.reactions_template('😮')
 
-    def eyeHeartsTotal(self):
-        return self.reactionsTemplate('😍')
+    def eye_hearts_total(self):
+        return self.reactions_template('😍')
 
-    def thumbsTotal(self):
-        return self.reactionsTemplate('👍')
+    def thumbs_total(self):
+        return self.reactions_template('👍')
 
-    def heartsReceivedTotal(self):
-        return self.reactionsTemplate('❤')
+    def hearts_received_total(self):
+        return self.reactions_template('❤')
 
-    def hahaReceivedTotal(self):
-        return self.reactionsTemplate('😆')
+    def haha_received_total(self):
+        return self.reactions_template('😆')
 
-    def wowReceivedTotal(self):
-        return self.reactionsTemplate('😮')
+    def wow_received_total(self):
+        return self.reactions_template('😮')
 
-    def eyeHeartsReceivedTotal(self):
-        return self.reactionsTemplate('😍')
+    def eye_hearts_received_total(self):
+        return self.reactions_template('😍')
 
-    def thumbsReceivedTotal(self):
-        return self.reactionsTemplate('👍')
+    def thumbs_received_total(self):
+        return self.reactions_template('👍')
 
-    def xdTotal(self):
-        return self.contentTemplate("xd")
+    def xd_total(self):
+        return self.content_template("xd")
 
-    def loveTotal(self):
-        return self.contentTemplate('❤') + self.contentTemplate('💕')
+    def love_total(self):
+        return self.content_template('❤') + self.content_template('💕')
 
-    def questionsTotal(self):
-        return self.contentTemplate("?")
+    def questions_total(self):
+        return self.content_template("?")
 
-    def omgTotal(self):
-        return self.contentTemplate("omg")
+    def omg_total(self):
+        return self.content_template("omg")
 
-    def givenWordTotal(self, word):
-        return self.contentTemplate(word)
+    def given_word_total(self, word):
+        return self.content_template(word)
 
-    def hahaWordTotal(self):
-        return self.contentTemplate("haha")
+    def haha_word_total(self):
+        return self.content_template("haha")
 
-    def mySentTotal(self, name="Pawel Krasicki"):
+    def my_sent_total(self, name="Pawel Krasicki"):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("sender_name") == name:
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("sender_name") == name:
                     total += 1
         return total
 
-    def myReactionsTotal(self, name="Pawel Krasicki"):
+    def my_reactions_total(self, name="Pawel Krasicki"):
         total = 0
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("reactions") is not None and messageDict.get("sender_name") == name:
-                    total += len(messageDict.get("reactions"))
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("reactions") is not None and message_dict.get("sender_name") == name:
+                    total += len(message_dict.get("reactions"))
         return total
 
-    def myPhotoTotal(self, name):
-        return self.myPhotoVideoTemplate("photos", name)
+    def my_photo_total(self, name):
+        return self.my_photo_video_template("photos", name)
 
-    def myVideoTotal(self, name):
-        return self.myPhotoVideoTemplate("videos", name)
+    def my_video_total(self, name):
+        return self.my_photo_video_template("videos", name)
 
-    def myMultimediaTotal(self, name):
-        return self.myVideoTotal(name) + self.myPhotoTotal(name)
+    def my_multimedia_total(self, name):
+        return self.my_video_total(name) + self.my_photo_total(name)
 
-    def myHeartsReceived(self, name):
-        return self.myReactionsReceivedTemplate('❤', name)
+    def my_hearts_received(self, name):
+        return self.my_reactions_received_template('❤', name)
 
-    def myHahaReceived(self, name):
-        return self.myReactionsReceivedTemplate('😆', name)
+    def my_haha_received(self, name):
+        return self.my_reactions_received_template('😆', name)
 
-    def myWowReceived(self, name):
-        return self.myReactionsReceivedTemplate('😮', name)
+    def my_wow_received(self, name):
+        return self.my_reactions_received_template('😮', name)
 
-    def myEyesReceived(self, name):
-        return self.myReactionsReceivedTemplate('😍', name)
+    def my_eyes_received(self, name):
+        return self.my_reactions_received_template('😍', name)
 
-    def myLikesReceived(self, name):
-        return self.myReactionsReceivedTemplate('👍', name)
+    def my_likes_received(self, name):
+        return self.my_reactions_received_template('👍', name)
 
-    def myHeartsGiven(self, name):
-        return self.myReactionsGivenTemplate('❤', name)
+    def my_hearts_given(self, name):
+        return self.my_reactions_given_template('❤', name)
 
-    def myHahaGiven(self, name):
-        return self.myReactionsGivenTemplate('😆', name)
+    def my_haha_given(self, name):
+        return self.my_reactions_given_template('😆', name)
 
-    def myWowGiven(self, name):
-        return self.myReactionsGivenTemplate('😮', name)
+    def my_wow_given(self, name):
+        return self.my_reactions_given_template('😮', name)
 
-    def myEyesGiven(self, name):
-        return self.myReactionsGivenTemplate('😍', name)
+    def my_eyes_given(self, name):
+        return self.my_reactions_given_template('😍', name)
 
-    def myLikesGiven(self, name):
-        return self.myReactionsGivenTemplate('👍', name)
+    def my_likes_given(self, name):
+        return self.my_reactions_given_template('👍', name)
 
-    def myXDTotal(self, name):
-        return self.myContentTemplate("xd", name)
+    def my_xd_total(self, name):
+        return self.my_content_template("xd", name)
 
-    def myQuestionsTotal(self, name):
-        return self.myContentTemplate("?", name)
+    def my_questions_total(self, name):
+        return self.my_content_template("?", name)
 
-    def myOmgTotal(self, name):
-        return self.myContentTemplate("omg", name)
+    def my_omg_total(self, name):
+        return self.my_content_template("omg", name)
 
-    def myGivenWordTotal(self, word, name):
-        return self.myContentTemplate(word, name)
+    def my_given_word_total(self, word, name):
+        return self.my_content_template(word, name)
 
-    def myQuestionsToAllPercent(self, name):
-        return int(100 * (self.myQuestionsTotal(name) / self.mySentTotal(name))) if self.mySentTotal() > 0 else 0
+    def my_questions_to_all_percent(self, name):
+        return int(100 * (self.my_questions_total(name) / self.my_sent_total(name))) if self.my_sent_total() > 0 else 0
 
-    def myXDToAllPercent(self, name):
-        return int(100 * (self.myXDTotal(name) / self.mySentTotal(name))) if self.mySentTotal() > 0 else 0
+    def my_xd_to_all_percent(self, name):
+        return int(100 * (self.my_xd_total(name) / self.my_sent_total(name))) if self.my_sent_total() > 0 else 0
 
 
 class ComparePeopleOperationTemplates(OperationTemplates):
-    def __init__(self, peopleConversationList):
-        self.peopleConversationList = peopleConversationList
+    def __init__(self, people_conversation_list):
+        self.people_conversation_list = people_conversation_list
 
-    def compareWordAmount(self, word):
-        xdAmount = []
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("content") is not None and messageDict.get("content").lower().__contains__(word):
-                    xdAmount.append((conversation.title, 1))
-        return self.sortDict(self.prepareDict(xdAmount))
+    def compare_word_amount(self, word):
+        xd_amount = []
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("content") is not None and message_dict.get("content").lower().__contains__(word):
+                    xd_amount.append((conversation.title, 1))
+        return self.sort_dict(self.prepare_dict(xd_amount))
 
-    def comparePhotoVideoAmount(self, photo, video='brak parametru'):
-        photoVideoAmount = []
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get(photo) is not None:
-                    photoVideoAmount.append((conversation.title, 1))
-                if messageDict.get(video) is not None:
-                    photoVideoAmount.append((conversation.title, 1))
-        return self.sortDict(self.prepareDict(photoVideoAmount))
+    def compare_photo_video_amount(self, photo, video='brak parametru'):
+        photo_video_amount = []
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get(photo) is not None:
+                    photo_video_amount.append((conversation.title, 1))
+                if message_dict.get(video) is not None:
+                    photo_video_amount.append((conversation.title, 1))
+        return self.sort_dict(self.prepare_dict(photo_video_amount))
 
-    def compareReactionsAmount(self, reaction1, reaction2='brak parametru'):
+    def compare_reactions_amount(self, reaction1, reaction2='brak parametru'):
         reactionList = []
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("reactions") is not None:
-                    for reaction in messageDict.get("reactions"):
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("reactions") is not None:
+                    for reaction in message_dict.get("reactions"):
                         if reaction.get("reaction").__contains__(reaction1) or \
                                 reaction.get('reaction').__contains__(reaction2):
                             reactionList.append((conversation.title, 1))
-        return self.sortDict(self.prepareDict(reactionList))
+        return self.sort_dict(self.prepare_dict(reactionList))
 
 
 class ComparePeople(ComparePeopleOperationTemplates):
-    def __init__(self, peopleConversationList):
-        super().__init__(peopleConversationList)
+    def __init__(self, people_conversation_list):
+        super().__init__(people_conversation_list)
 
-    def compareMessageAmount(self):
-        messageLenPerPerson = [(conversation.title, len(conversation.messages)) for conversation in
-                               self.peopleConversationList.conversations]
-        return self.sortDict(self.prepareDict(messageLenPerPerson))
+    def compare_message_amount(self):
+        message_len_per_person = [(conversation.title, len(conversation.messages)) for conversation in
+                                  self.people_conversation_list.conversations]
+        return self.sort_dict(self.prepare_dict(message_len_per_person))
 
-    def comparePhotoAmount(self):
-        return self.comparePhotoVideoAmount('photos')
+    def compare_photo_amount(self):
+        return self.compare_photo_video_amount('photos')
 
-    def compareVideoAmount(self):
-        return self.comparePhotoVideoAmount('videos')
+    def compare_video_amount(self):
+        return self.compare_photo_video_amount('videos')
 
-    def compareMultimediaAmount(self):
-        return self.comparePhotoVideoAmount('photos', 'videos')
+    def compare_multimedia_amount(self):
+        return self.compare_photo_video_amount('photos', 'videos')
 
-    def compareXDAmount(self):
-        return self.compareWordAmount("xd")
+    def compare_xd_amount(self):
+        return self.compare_word_amount("xd")
 
-    def compareHahaWordAmount(self):
-        return self.compareWordAmount("haha")
+    def compare_haha_word_amount(self):
+        return self.compare_word_amount("haha")
 
-    def compareOmgAmount(self):
-        return self.compareWordAmount("omg")
+    def compare_omg_amount(self):
+        return self.compare_word_amount("omg")
 
-    def compareLoveAmount(self):
-        loveAmount = []
-        for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("content") is not None and (messageDict.get("content").__contains__('❤') or
-                                                               messageDict.get("content").__contains__('💕')):
-                    loveAmount.append((conversation.title, 1))
-        return self.sortDict(self.prepareDict(loveAmount))
+    def compare_love_amount(self):
+        love_amount = []
+        for conversation in self.people_conversation_list.conversations:
+            for message_dict in conversation.messages:
+                if message_dict.get("content") is not None and (message_dict.get("content").__contains__('❤') or
+                                                                message_dict.get("content").__contains__('💕')):
+                    love_amount.append((conversation.title, 1))
+        return self.sort_dict(self.prepare_dict(love_amount))
 
-    def compareGivenWordAmount(self, word=""):
-        return self.compareWordAmount(word)
+    def compare_given_word_amount(self, word=""):
+        return self.compare_word_amount(word)
 
-    def compareHeartsAmount(self):
-        return self.compareReactionsAmount('❤', '💕')
+    def compare_hearts_amount(self):
+        return self.compare_reactions_amount('❤', '💕')
 
-    def compareHahaAmount(self):
-        return self.compareReactionsAmount('😂', '😆')
+    def compare_haha_amount(self):
+        return self.compare_reactions_amount('😂', '😆')
 
-    def compareLikesAmount(self):
-        return self.compareReactionsAmount('👍')
+    def compare_likes_amount(self):
+        return self.compare_reactions_amount('👍')
 
-    def compareWowAmount(self):
-        return self.compareReactionsAmount('😮')
+    def compare_wow_amount(self):
+        return self.compare_reactions_amount('😮')
 
-    def compareEyesAmount(self):
-        return self.compareReactionsAmount('😍')
+    def compare_eyes_amount(self):
+        return self.compare_reactions_amount('😍')
 
 
 class AboutMe(OperationTemplates):
-    def __init__(self, peopleConversationList):
-        self.peopleConversationList = peopleConversationList
+    def __init__(self, people_conversation_list):
+        self.peopleConversationList = people_conversation_list
 
-    def compareMyWordUsage(self, name="Pawel Krasicki"):   # counter koniecznie zliczający listę wszystkich moich słów
-        myWordList = []
+    def compare_my_word_usage(self, name="Pawel Krasicki"):  # counter koniecznie zliczający listę wszystkich moich słów
+        my_word_list = []
         for conversation in self.peopleConversationList.conversations:
-            for messageDict in conversation.messages:
-                if messageDict.get("content") is not None and messageDict.get("sender_name") == name:
-                    for word in messageDict.get("content").split():
-                        myWordList.append((word, 1))
-        return self.sortDict(self.prepareDict(myWordList))
+            for message_dict in conversation.messages:
+                if message_dict.get("content") is not None and message_dict.get("sender_name") == name:
+                    for word in message_dict.get("content").split():
+                        my_word_list.append((word, 1))
+        return self.sort_dict(self.prepare_dict(my_word_list))

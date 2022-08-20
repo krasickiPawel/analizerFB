@@ -21,44 +21,44 @@ class PlotShow:
 
 
 class AboutMeShow(AboutMe, PlotShow):
-    def __init__(self, peopleConversationList):
-        super().__init__(peopleConversationList)
+    def __init__(self, people_conversation_list):
+        super().__init__(people_conversation_list)
 
     def compareMyWordUsageShow(self, name="Pawel Krasicki"):
         title = 'Najczęściej używane przez ciebie słowa'
         xLabel = 'Najczęściej używasz "{}": {}'
-        self.showPlot(self.compareMyWordUsage(name), title, xLabel)
+        self.showPlot(self.compare_my_word_usage(name), title, xLabel)
 
 
 class MyTotalShow(Total, PlotShow):
-    def __init__(self, peopleConversationList):
-        super().__init__(peopleConversationList)
+    def __init__(self, people_conversation_list):
+        super().__init__(people_conversation_list)
 
     def my_general_info_show(self, name):
         plt.figure(figsize=(8, 5))
         plt.suptitle('Statystyki tego co {} napisał(a) na całym messengerze'.format(name))
-        messagesNumber = "{} wiadomości \n".format(self.mySentTotal(name))
-        textMessagesTotal = "Wiadomości tekstowych: {} \n".format(self.myTextMessagesSentTotal(name))
-        avgMessageLength = "Średnia długość wiadomości: {} znaków \n".format(self.myAvgMessageLen(name))
-        xdTotal = 'Ilość wszystkich "XD": {}\n'.format(self.myXDTotal(name))
-        multimediaTotal = "Wszystkich multimediów: {} \n".format(self.myMultimediaTotal(name))
-        photoTotal = "   Zdjęć: {} \n".format(self.myPhotoTotal(name))
-        videoTotal = "   Filmików: {} \n".format(self.myVideoTotal(name))
-        reactionsTotal = "Wszystkich reakcji: {} \n".format(self.myReactionsTotal(name))
-        heartsTotalG = "   Serduszek danych: {}\n".format(self.myHeartsGiven(name))
-        heartsTotalR = "   Serduszek otrzymanych {}\n".format(self.myHeartsReceived(name))
-        hahaTotalG = "   Emotek śmiechu danych: {}\n".format(self.myHahaGiven(name))
-        hahaTotalR = "   Emotek śmiechu otrzymanych: {}\n".format(self.myHahaReceived(name))
-        thumbsTotalG = "   Kciuków w górę danych: {}\n".format(self.myLikesGiven(name))
-        thumbsTotalR = "   Kciuków w górę otrzymanych: {}\n".format(self.myLikesReceived(name))
-        eyesTotalG = '   Serduszek w oczach danych: {}\n'.format(self.myEyesGiven(name))
-        eyesTotalR = '   Serduszek w oczach otrzymanych: {}\n'.format(self.myEyesReceived(name))
-        wowTotalG = "   Reakcji wow danych: {}\n".format(self.myWowGiven(name))
-        wowTotalR = "   Reakcji wow otrzymanych: {}\n".format(self.myWowReceived(name))
-        unsentTotal = "Usuniętych wiadomości: {}\n".format(self.myUnsentTotal(name))
-        questions = "Zadanych pytań: {}\n".format(self.myQuestionsTotal(name))
-        questionsPercent = "Stosunek pytań do wszystkich wiadomości: {}%\n".format(self.myQuestionsToAllPercent(name))
-        xdToAllPercent = 'Stosunek "XD" do wszystkich wiadomości: {}%\n'.format(self.myXDToAllPercent(name))
+        messagesNumber = "{} wiadomości \n".format(self.my_sent_total(name))
+        textMessagesTotal = "Wiadomości tekstowych: {} \n".format(self.my_text_messages_sent_total(name))
+        avgMessageLength = "Średnia długość wiadomości: {} znaków \n".format(self.my_avg_message_len(name))
+        xdTotal = 'Ilość wszystkich "XD": {}\n'.format(self.my_xd_total(name))
+        multimediaTotal = "Wszystkich multimediów: {} \n".format(self.my_multimedia_total(name))
+        photoTotal = "   Zdjęć: {} \n".format(self.my_photo_total(name))
+        videoTotal = "   Filmików: {} \n".format(self.my_video_total(name))
+        reactionsTotal = "Wszystkich reakcji: {} \n".format(self.my_reactions_total(name))
+        heartsTotalG = "   Serduszek danych: {}\n".format(self.my_hearts_given(name))
+        heartsTotalR = "   Serduszek otrzymanych {}\n".format(self.my_hearts_received(name))
+        hahaTotalG = "   Emotek śmiechu danych: {}\n".format(self.my_haha_given(name))
+        hahaTotalR = "   Emotek śmiechu otrzymanych: {}\n".format(self.my_haha_received(name))
+        thumbsTotalG = "   Kciuków w górę danych: {}\n".format(self.my_likes_given(name))
+        thumbsTotalR = "   Kciuków w górę otrzymanych: {}\n".format(self.my_likes_received(name))
+        eyesTotalG = '   Serduszek w oczach danych: {}\n'.format(self.my_eyes_given(name))
+        eyesTotalR = '   Serduszek w oczach otrzymanych: {}\n'.format(self.my_eyes_received(name))
+        wowTotalG = "   Reakcji wow danych: {}\n".format(self.my_wow_given(name))
+        wowTotalR = "   Reakcji wow otrzymanych: {}\n".format(self.my_wow_received(name))
+        unsentTotal = "Usuniętych wiadomości: {}\n".format(self.my_unsent_total(name))
+        questions = "Zadanych pytań: {}\n".format(self.my_questions_total(name))
+        questionsPercent = "Stosunek pytań do wszystkich wiadomości: {}%\n".format(self.my_questions_to_all_percent(name))
+        xdToAllPercent = 'Stosunek "XD" do wszystkich wiadomości: {}%\n'.format(self.my_xd_to_all_percent(name))
         plt.figtext(0.1, 0.08, messagesNumber + avgMessageLength + textMessagesTotal +
                     multimediaTotal + photoTotal + videoTotal + questions +
                     xdTotal + unsentTotal + reactionsTotal + heartsTotalG + heartsTotalR + hahaTotalG + hahaTotalR +
@@ -85,63 +85,63 @@ class MyTotalShow(Total, PlotShow):
 
     def myXDPie(self, name):
         x = ['"XD"', 'wiadomości bez "XD"']
-        y = [self.myXDTotal(name), self.myTextMessagesSentTotal(name) - self.myXDTotal(name)]
+        y = [self.my_xd_total(name), self.my_text_messages_sent_total(name) - self.my_xd_total(name)]
         return plt.pie(y, labels=x, startangle=0)
 
     def myMultimediaPie(self, name):
         x2 = ['zdjęcia i filmiki', 'wiadomości tekstowe']
-        y2 = [self.myMultimediaTotal(name), self.myTextMessagesSentTotal(name)]
+        y2 = [self.my_multimedia_total(name), self.my_text_messages_sent_total(name)]
         return plt.pie(y2, labels=x2)
 
     def myEmoticonPie(self, name):
         plt.title("Otrzymane reakcje")
         x = ['serduszka ❤', 'serduszka w oczach', 'kciuki', 'haha', 'wow']
-        y = [self.myHeartsReceived(name), self.myEyesReceived(name), self.myLikesReceived(name),
-             self.myHahaReceived(name), self.myWowReceived(name)]
+        y = [self.my_hearts_received(name), self.my_eyes_received(name), self.my_likes_received(name),
+             self.my_haha_received(name), self.my_wow_received(name)]
         return plt.pie(y, labels=x, startangle=0) if sum(y) > 0 else None
 
     def myEmoticonPie2(self, name):
         plt.title("Dane reakcje")
         x = ['serduszka ❤', 'serduszka w oczach', 'kciuki', 'haha', 'wow']
-        y = [self.myHeartsGiven(name), self.myEyesGiven(name), self.myLikesGiven(name),
-             self.myHahaGiven(name), self.myWowGiven(name)]
+        y = [self.my_hearts_given(name), self.my_eyes_given(name), self.my_likes_given(name),
+             self.my_haha_given(name), self.my_wow_given(name)]
         return plt.pie(y, labels=x, startangle=0) if sum(y) > 0 else None
 
     def myQuestionPie(self, name):
         x2 = ['pytania', 'wiadomości bez pytań']
-        y2 = [self.myQuestionsTotal(name), self.myTextMessagesSentTotal(name) - self.myQuestionsTotal(name)]
+        y2 = [self.my_questions_total(name), self.my_text_messages_sent_total(name) - self.my_questions_total(name)]
         return plt.pie(y2, labels=x2)
 
     def myReceivedToGivenReactionsPie(self, name):
         x = ['otrzymane reakcje', 'dane reakcje']
-        y = [self.myReactionsReceivedTemplate("", name), self.myReactionsGivenTemplate("", name)]
+        y = [self.my_reactions_received_template("", name), self.my_reactions_given_template("", name)]
         return plt.pie(y, labels=x)
 
 
 class TotalShow(Total, PlotShow):
-    def __init__(self, peopleConversationList):
-        super().__init__(peopleConversationList)
+    def __init__(self, people_conversation_list):
+        super().__init__(people_conversation_list)
 
     def generalInfoShow(self):
         plt.figure(figsize=(8, 5))
         plt.suptitle('Statystyki całego Twojego messengera')
-        messagesNumber = "{} wiadomości \n".format(self.messengerSentTotal())
-        textMessagesTotal = "Wiadomości tekstowych: {} \n".format(self.messengerTextMessagesSentTotal())
-        avgMessageLength = "Średnia długość wiadomości: {} znaków \n".format(self.messengerAvgMessageLen())
-        xdTotal = 'Ilość wszystkich "XD": {}\n'.format(self.xdTotal())
-        multimediaTotal = "Wszystkich multimediów: {} \n".format(self.multimediaTotal())
-        photoTotal = "   Zdjęć: {} \n".format(self.photoTotal())
-        videoTotal = "   Filmików: {} \n".format(self.videoTotal())
-        reactionsTotal = "Wszystkich reakcji: {} \n".format(self.messengerReactionsTotal())
-        heartsTotal = "   Serduszek: {}\n".format(self.heartsTotal())
-        hahaTotal = "   Emotek śmiechu: {}\n".format(self.hahaTotal())
-        thumbsTotal = "   Kciuków w górę: {}\n".format(self.thumbsTotal())
-        eyesTotal = '   Serduszek w oczach: {}\n'.format(self.eyeHeartsTotal())
-        wowTotal = "   Reakcji wow: {}\n".format(self.wowTotal())
-        unsentTotal = "Usuniętych wiadomości: {}\n".format(self.messengerUnsentTotal())
-        questions = "Zadanych pytań: {}\n".format(self.questionsTotal())
-        questionsPercent = "Stosunek pytań do wszystkich wiadomości: {}%\n".format(self.questionsToAllPercent())
-        xdToAllPercent = 'Stosunek "XD" do wszystkich wiadomości: {}%\n'.format(self.xdToAllPercent())
+        messagesNumber = "{} wiadomości \n".format(self.messenger_sent_total())
+        textMessagesTotal = "Wiadomości tekstowych: {} \n".format(self.messenger_text_messages_sent_total())
+        avgMessageLength = "Średnia długość wiadomości: {} znaków \n".format(self.messenge_avg_message_len())
+        xdTotal = 'Ilość wszystkich "XD": {}\n'.format(self.xd_total())
+        multimediaTotal = "Wszystkich multimediów: {} \n".format(self.multimedia_total())
+        photoTotal = "   Zdjęć: {} \n".format(self.photo_total())
+        videoTotal = "   Filmików: {} \n".format(self.video_total())
+        reactionsTotal = "Wszystkich reakcji: {} \n".format(self.messenger_reactions_total())
+        heartsTotal = "   Serduszek: {}\n".format(self.hearts_total())
+        hahaTotal = "   Emotek śmiechu: {}\n".format(self.haha_total())
+        thumbsTotal = "   Kciuków w górę: {}\n".format(self.thumbs_total())
+        eyesTotal = '   Serduszek w oczach: {}\n'.format(self.eye_hearts_total())
+        wowTotal = "   Reakcji wow: {}\n".format(self.wow_total())
+        unsentTotal = "Usuniętych wiadomości: {}\n".format(self.messenger_unsent_total())
+        questions = "Zadanych pytań: {}\n".format(self.questions_total())
+        questionsPercent = "Stosunek pytań do wszystkich wiadomości: {}%\n".format(self.questions_to_all_percent())
+        xdToAllPercent = 'Stosunek "XD" do wszystkich wiadomości: {}%\n'.format(self.xd_to_all_percent())
         plt.figtext(0.1, 0.2, messagesNumber + avgMessageLength + textMessagesTotal +
                     multimediaTotal + photoTotal + videoTotal + questions +
                     xdTotal + unsentTotal + reactionsTotal + heartsTotal + hahaTotal + wowTotal +
@@ -163,101 +163,101 @@ class TotalShow(Total, PlotShow):
 
     def xdPie(self):
         x = ['"XD"', 'wiadomości bez "XD"']
-        y = [self.xdTotal(), self.messengerTextMessagesSentTotal() - self.xdTotal()]
+        y = [self.xd_total(), self.messenger_text_messages_sent_total() - self.xd_total()]
         return plt.pie(y, labels=x, startangle=0)
 
     def multimediaPie(self):
         x2 = ['zdjęcia i filmiki', 'wiadomości tekstowe']
-        y2 = [self.multimediaTotal(), self.messengerTextMessagesSentTotal()]
+        y2 = [self.multimedia_total(), self.messenger_text_messages_sent_total()]
         return plt.pie(y2, labels=x2)
 
     def emoticonPie(self):
         x = ['serduszka ❤', 'serduszka w oczach', 'kciuki', 'haha', 'wow']
-        y = [self.heartsTotal(), self.eyeHeartsTotal(), self.thumbsTotal(), self.hahaTotal(), self.wowTotal()]
+        y = [self.hearts_total(), self.eye_hearts_total(), self.thumbs_total(), self.haha_total(), self.wow_total()]
         return plt.pie(y, labels=x, startangle=0) if sum(y) > 0 else None
 
     def questionPie(self):
         x2 = ['pytania', 'wiadomości bez pytań']
-        y2 = [self.questionsTotal(), self.messengerTextMessagesSentTotal() - self.questionsTotal()]
+        y2 = [self.questions_total(), self.messenger_text_messages_sent_total() - self.questions_total()]
         return plt.pie(y2, labels=x2)
 
 
 class ComparePeopleShow(Total, ComparePeople, PlotShow):
-    def __init__(self, peopleConversationList):
-        super().__init__(peopleConversationList)
+    def __init__(self, people_conversation_list):
+        super().__init__(people_conversation_list)
 
     def compare_message_amount_show(self):
-        title = "Ilość wiadomości z daną osobą z {} wszystkich wiadomości".format(self.messengerSentTotal())
+        title = "Ilość wiadomości z daną osobą z {} wszystkich wiadomości".format(self.messenger_sent_total())
         xLabel = "Najwięcej wiadomości z {}: {}"
-        self.showPlot(self.compareMessageAmount(), title, xLabel)
+        self.showPlot(self.compare_message_amount(), title, xLabel)
 
     def compare_multimedia_amount_show(self):
-        title = "Ilość zjęć i filmików z daną osobą z {} wszystkich multimediów".format(self.multimediaTotal())
+        title = "Ilość zjęć i filmików z daną osobą z {} wszystkich multimediów".format(self.multimedia_total())
         xLabel = "Najwięcej zdjęć i filmików z {}: {}"
-        self.showPlot(self.compareMultimediaAmount(), title, xLabel)
+        self.showPlot(self.compare_multimedia_amount(), title, xLabel)
 
     def compare_photo_amount_show(self):
-        title = "Ilość zdjęć z daną osobą z {} wszystkich zdjęć".format(self.photoTotal())
+        title = "Ilość zdjęć z daną osobą z {} wszystkich zdjęć".format(self.photo_total())
         xLabel = "Najwięcej zdjęć z {}: {}"
-        self.showPlot(self.comparePhotoAmount(), title, xLabel)
+        self.showPlot(self.compare_photo_amount(), title, xLabel)
 
     def compare_video_amount_show(self):
-        title = "Ilość filmików z daną osobą z {} wszystkich filmików".format(self.videoTotal())
+        title = "Ilość filmików z daną osobą z {} wszystkich filmików".format(self.video_total())
         xLabel = "Najwięcej zdjęć z {}: {}"
-        self.showPlot(self.compareVideoAmount(), title, xLabel)
+        self.showPlot(self.compare_video_amount(), title, xLabel)
 
     def compare_xd_amount_show(self):
-        title = 'Ilość "XD" z daną osobą z {} wszystkich "XD"'.format(self.xdTotal())
+        title = 'Ilość "XD" z daną osobą z {} wszystkich "XD"'.format(self.xd_total())
         xLabel = 'Najwięcej "XD" z {}: {}'
-        self.showPlot(self.compareXDAmount(), title, xLabel)
+        self.showPlot(self.compare_xd_amount(), title, xLabel)
 
     def compare_haha_word_amount_show(self):
-        title = 'Ilość napisanych "haha" z daną osobą z {} wszystkich "haha"'.format(self.hahaWordTotal())
+        title = 'Ilość napisanych "haha" z daną osobą z {} wszystkich "haha"'.format(self.haha_word_total())
         xLabel = 'Najwięcej tekstowych "haha" z {}: {}'
-        self.showPlot(self.compareHahaWordAmount(), title, xLabel)
+        self.showPlot(self.compare_haha_word_amount(), title, xLabel)
 
     def compare_given_word_amount_show(self, word=""):
         title = 'Ilość "{}" z daną osobą'.format(word)
         xLabel = 'Najwięcej "{word1}" z {blank1}: {blank2}'.format(word1=word, blank1='{}', blank2='{}')
-        self.showPlot(self.compareGivenWordAmount(word), title, xLabel)
+        self.showPlot(self.compare_given_word_amount(word), title, xLabel)
 
     def compare_love_amount_show(self):
-        title = 'Ilość wysłanych serduszek (nie reakcji) z daną osobą z {} wszystkich serduszek'.format(self.loveTotal())
+        title = 'Ilość wysłanych serduszek (nie reakcji) z daną osobą z {} wszystkich serduszek'.format(self.love_total())
         xLabel = 'Najwięcej wysłanych wiadomości z serduszkami z {}: {}'
-        self.showPlot(self.compareLoveAmount(), title, xLabel)
+        self.showPlot(self.compare_love_amount(), title, xLabel)
 
     def compareOmgAmountShow(self):
-        title = 'Ilość napisanych "omg" z daną osobą z {} wszystkich "omg"'.format(self.omgTotal())
+        title = 'Ilość napisanych "omg" z daną osobą z {} wszystkich "omg"'.format(self.omg_total())
         xLabel = 'Najwięcej "omg" z {}: {}'
-        self.showPlot(self.compareOmgAmount(), title, xLabel)
+        self.showPlot(self.compare_omg_amount(), title, xLabel)
 
     def compare_hearts_amount_show(self):
-        title = 'Wysłanych serduszek z daną osobą z wszystkich {} serduszek'.format(self.heartsTotal())
+        title = 'Wysłanych serduszek z daną osobą z wszystkich {} serduszek'.format(self.hearts_total())
         xLabel = 'Najwięcej serduszek z {}: {}'
-        self.showPlot(self.compareHeartsAmount(), title, xLabel)
+        self.showPlot(self.compare_hearts_amount(), title, xLabel)
 
     def compare_haha_amount_show(self):
-        title = 'Wysłanych emotek "haha" z daną osobą z wszystkich {} emotek"haha"'.format(self.hahaTotal())
+        title = 'Wysłanych emotek "haha" z daną osobą z wszystkich {} emotek"haha"'.format(self.haha_total())
         xLabel = 'Najwięcej "haha" z {}: {}'
-        self.showPlot(self.compareHahaAmount(), title, xLabel)
+        self.showPlot(self.compare_haha_amount(), title, xLabel)
 
     def compare_wow_amount_show(self):
-        title = 'Wysłanych "wow" z daną osobą z wszystkich {} "wow"'.format(self.wowTotal())
+        title = 'Wysłanych "wow" z daną osobą z wszystkich {} "wow"'.format(self.wow_total())
         xLabel = 'Najwięcej "wow" z {}: {}'
-        self.showPlot(self.compareWowAmount(), title, xLabel)
+        self.showPlot(self.compare_wow_amount(), title, xLabel)
 
     def compare_likes_amount_show(self):
-        title = 'Wysłanych lajków z daną osobą z wszystkich {} lajków'.format(self.thumbsTotal())
+        title = 'Wysłanych lajków z daną osobą z wszystkich {} lajków'.format(self.thumbs_total())
         xLabel = 'Najwięcej lajków z {}: {}'
-        self.showPlot(self.compareLikesAmount(), title, xLabel)
+        self.showPlot(self.compare_likes_amount(), title, xLabel)
 
     def compare_eyes_amount_show(self):
         title = 'Wysłanych serduszek w oczach z daną osobą z wszystkich {} buziek z serduszkami w oczach'.format(
-            self.eyeHeartsTotal())
+            self.eye_hearts_total())
         xLabel = 'Najwięcej serduszek w oczach z {}: {}'
-        self.showPlot(self.compareEyesAmount(), title, xLabel)
+        self.showPlot(self.compare_eyes_amount(), title, xLabel)
 
 
 class HorrorShow(AboutMeShow, MyTotalShow, TotalShow, ComparePeopleShow):
-    def __init__(self, peopleConversationList):
-        super().__init__(peopleConversationList)
+    def __init__(self, people_conversation_list):
+        super().__init__(people_conversation_list)
