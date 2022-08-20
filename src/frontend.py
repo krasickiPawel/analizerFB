@@ -2,7 +2,7 @@ from tkinter import PhotoImage, Toplevel, StringVar, HORIZONTAL, Label, Tk, file
 from tkinter.ttk import Progressbar
 from conversationStatisticsFrontend import Show
 from statisticsFrontend import HorrorShow
-from fileReader import multi_directory_read, directoryRead
+from fileReader import multi_directory_read, directory_read
 from threading import Thread
 
 
@@ -181,7 +181,7 @@ class FrontendWindow:
     def choose_conversation(self):  # tu skończyć
         conv_dir = filedialog.askdirectory()
         try:
-            self.conversation = directoryRead(conv_dir)
+            self.conversation = directory_read(conv_dir)
             anal_window = self.anal_conv_window()
             anal_window.wait_window()
         except Exception:

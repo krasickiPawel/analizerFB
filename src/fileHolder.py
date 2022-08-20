@@ -8,7 +8,7 @@ class ConversationInfo:
         self.title = str()
 
     @staticmethod
-    def fromDictionary(dictionary):
+    def from_dictionary(dictionary):
         output = ConversationInfo()
         output.messages = dictionary.get("messages")
         output.participants = dictionary.get("participants")
@@ -20,6 +20,6 @@ class ConversationInfoList:
     def __init__(self):
         self.conversations = []
 
-    def addConversation(self, dictionary):
+    def add_conversation(self, dictionary):
         self.conversations.append(dictionary)
 
