@@ -87,8 +87,8 @@ class FrontendWindow:
         def general():
             active_label.pack(pady=5)
             window.update_idletasks()
-            s.generalInfoShow()
-            s.pieShow()
+            s.general_info_show()
+            s.pie_show()
             active_label.pack_forget()
 
         def my_general():
@@ -98,7 +98,7 @@ class FrontendWindow:
                 window.update_idletasks()
                 name = entry.get()
                 s.my_general_info_show(name)
-                s.myPieShow(name)
+                s.my_pie_show(name)
                 active_label.pack_forget()
                 entry.configure(fg="black")
             else:
@@ -127,7 +127,7 @@ class FrontendWindow:
                 name = entry.get()
                 entry.configure(fg="green")
                 window.update_idletasks()
-                s.compareMyWordUsageShow(name)
+                s.compare_my_word_usage_show(name)
                 active_label.pack_forget()
                 entry.configure(fg="black")
             else:
