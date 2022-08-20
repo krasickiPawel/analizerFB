@@ -23,7 +23,7 @@ class FrontendWindow:
         text_label = Label(text="Wybierz co chcesz zrobić", font=('Arial', 12))
         text_label.pack(pady=10)
         all_conv = Button(window, text="Przeanalizuj wszystkie konwersacje na tle innych konwersacji",
-                         command=self.chooseInbox)
+                          command=self.choose_inbox)
         all_conv.pack(pady=5)
         Label(text="(wskaż folder inbox)", font=('Arial', 7)).pack()
         conv = Button(window, text="Przeanalizuj ludzi w danej konwersacji", command=self.choose_conversation)
@@ -39,47 +39,51 @@ class FrontendWindow:
     def info(self):
         info_window = Toplevel()
         info_window.title(self.title)
-        infoText = 'W celu uruchomienia analizy wiadomości konieczne jest pobranie z Facebooka\n' \
-                   'pliku JSON z kopią danych m.in. wiadomości. Aby to zrobić należy\n' \
-                   'na Facebooku wejść w Ustawienia i prywatność -> Ustawienia ->\n' \
-                   'Twoje informacje na Facebooku -> Pobieranie Twoich informacji,\n' \
-                   'a następnie wybrać okres, FORMAT JSON i zaznaczyć wiadomości.\n' \
-                   'Po kliknięciu "Utwórz plik", po pewnym czasie (kilka godzin, zależy od zakresu dat)\n' \
-                   'przyjdzie powiadomienie z plikiem do pobrania. Pobrany plik wypakowujemy.\n' \
-                   'Gotowe. Teraz w programie wskazujemy folder "inbox" lub w przypadku\n' \
-                   'analizy konkretnej konwersacji wskazujemy folder konwersacji w folderze inbox.\n\n' \
-                   'Pamiętaj, aby nie zostawiać pustych pól przewidzianych do wprowadzenia tekstu.\n\n' \
-                   'Miłego analizowania!\n' \
-                   'Paweł Krasicki.'
-        Label(info_window, text=infoText, font=("Consolas", 12)).pack(pady=50, padx=50)
+        info_text = 'W celu uruchomienia analizy wiadomości konieczne jest pobranie z Facebooka\n' \
+                    'pliku JSON z kopią danych m.in. wiadomości. Aby to zrobić należy\n' \
+                    'na Facebooku wejść w Ustawienia i prywatność -> Ustawienia ->\n' \
+                    'Twoje informacje na Facebooku -> Pobieranie Twoich informacji,\n' \
+                    'a następnie wybrać okres, FORMAT JSON i zaznaczyć wiadomości.\n' \
+                    'Po kliknięciu "Utwórz plik", po pewnym czasie (kilka godzin, zależy od zakresu dat)\n' \
+                    'przyjdzie powiadomienie z plikiem do pobrania. Pobrany plik wypakowujemy.\n' \
+                    'Gotowe. Teraz w programie wskazujemy folder "inbox" lub w przypadku\n' \
+                    'analizy konkretnej konwersacji wskazujemy folder konwersacji w folderze inbox.\n\n' \
+                    'Pamiętaj, aby nie zostawiać pustych pól przewidzianych do wprowadzenia tekstu.\n\n' \
+                    'Miłego analizowania!\n' \
+                    'Paweł Krasicki.'
+        Label(info_window, text=info_text, font=("Consolas", 12)).pack(pady=50, padx=50)
         info_window.wait_window()
 
-    def prepare_loading_window(self, pathVariable):
+    def prepare_loading_window(self, path_variable):
         window = Toplevel()
         window.title(self.title)
         bar = Progressbar(window, orient=HORIZONTAL, length=400)
         bar.pack(pady=10)
-        Label(window, textvariable=pathVariable).pack()
+        Label(window, textvariable=path_variable).pack()
         window.geometry("500x100")
         return window, bar
 
-    def chooseInbox(self):
+    def choose_inbox(self):
         path_variable = StringVar()
         inbox = filedialog.askdirectory()
         try:
             window, bar = self.prepare_loading_window(path_variable)
             self.file_loading_window = window
             results = [None]
+            print(results[0])
             t1 = Thread(target=multi_directory_read, args=(inbox, window, path_variable, bar, results))
             t1.start()
             window.mainloop()
             t1.join()
+            print(results[0])
+            print(results[0].conversations)
             self.people_comparison = results[0]
             window.destroy()
             anal_window = self.anal_all_window()
             anal_window.wait_window()
-        except Exception:
-            messagebox.showwarning(title="ERROR 1", message="Wskazany folder niemożliwy do analizy!")
+        except Exception as e:
+            # messagebox.showwarning(title="ERROR 1", message="Wskazany folder niemożliwy do analizy!")
+            messagebox.showwarning(title="ERROR 1", message=f'{e.args}')
 
     def anal_all_window(self):
         s = HorrorShow(self.people_comparison)
@@ -145,6 +149,7 @@ class FrontendWindow:
                     entry_word.configure(fg="black")
                 else:
                     messagebox.showwarning(title="BRAK WYRAZU!", message="Podaj wyraz do analizy!")
+
             word_window = Toplevel()
             word_window.title(self.title)
             Label(word_window, text="Wprowadź wyraz do przeanalizowania jego stopnia użycia",
@@ -160,7 +165,7 @@ class FrontendWindow:
         window = Toplevel()
         window.title(self.title)
         info_label = Label(window, text="Wpisz swoje imię i nazwisko dokładnie tak, jak masz na facebooku",
-                          font=("Arial", 8))
+                           font=("Arial", 8))
         info_label.pack()
         entry = Entry(window, font=("Arial", 14))
         entry.pack()

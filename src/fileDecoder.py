@@ -1,26 +1,26 @@
-def decodeFile(conversationInfo):
-    conversationInfo.participants = decodeDictionaryList(conversationInfo.participants)
-    conversationInfo.messages = decodeDictionaryList(conversationInfo.messages)
-    conversationInfo.title = decodeSingleString(conversationInfo.title)
-    return conversationInfo
+def decode_file(conversation_info):
+    conversation_info.participants = decode_dictionary_list(conversation_info.participants)
+    conversation_info.messages = decode_dictionary_list(conversation_info.messages)
+    conversation_info.title = decode_single_string(conversation_info.title)
+    return conversation_info
 
 
-def decodeSingleString(text):
+def decode_single_string(text):
     text = text.encode('latin_1').decode('utf-8')
     return text
 
 
-def decodeDictionaryList(conversationInfoList):
-    newList = []
-    for obj in conversationInfoList:
+def decode_dictionary_list(conversation_info_list):
+    new_list = []
+    for obj in conversation_info_list:
         for key in obj:
             if isinstance(obj[key], str):
                 obj[key] = obj[key].encode('latin_1').decode('utf-8')
             elif isinstance(obj[key], list):
                 for dictionary in obj[key]:
-                    for reactionsKey in dictionary:
-                        if isinstance(dictionary[reactionsKey], str):
-                            dictionary[reactionsKey] = dictionary[reactionsKey].encode('latin_1').decode('utf-8')
+                    for reactions_key in dictionary:
+                        if isinstance(dictionary[reactions_key], str):
+                            dictionary[reactions_key] = dictionary[reactions_key].encode('latin_1').decode('utf-8')
             pass
-        newList.append(obj)
-    return newList
+        new_list.append(obj)
+    return new_list

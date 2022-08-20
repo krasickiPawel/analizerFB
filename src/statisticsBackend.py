@@ -89,7 +89,7 @@ class TotalOperationTemplates:
 
 class Total(TotalOperationTemplates):
     def __init__(self, people_conversation_list):
-        super(Total, self).__init__(people_conversation_list)
+        super().__init__(people_conversation_list)
 
     def messenger_sent_total(self):
         return sum([len(conversation.messages) for conversation in self.people_conversation_list.conversations])

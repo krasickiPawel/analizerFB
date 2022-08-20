@@ -259,6 +259,6 @@ class ComparePeopleShow(Total, ComparePeople, PlotShow):
         self.show_plot(self.compare_eyes_amount(), title, x_label)
 
 
-class HorrorShow(AboutMeShow, MyTotalShow, TotalShow, ComparePeopleShow):
+class HorrorShow(TotalShow, AboutMeShow, MyTotalShow, ComparePeopleShow):
     def __init__(self, people_conversation_list):
         super().__init__(people_conversation_list)

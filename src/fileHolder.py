@@ -13,7 +13,7 @@ class ConversationInfo:
         output.messages = dictionary.get("messages")
         output.participants = dictionary.get("participants")
         output.title = dictionary.get("title")
-        return fileDecoder.decodeFile(output)
+        return fileDecoder.decode_file(output)
 
 
 class ConversationInfoList:
