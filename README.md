@@ -69,5 +69,5 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 ## Recommendations
 
 Similar projects
-* [PWr W4 ITE Messenger statistics by Maciej Byczko](https://github.com/Byczax/messenger_graphs_statistics)
+* [PWr W4 ITE Messenger statistics by Byczax](https://github.com/Byczax/messenger_graphs_statistics)
 * [Mine and KrystianOg project, which is an open API (web app) written in Django, doing the same as the project presented above]()
