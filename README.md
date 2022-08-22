@@ -33,6 +33,8 @@ For the use of the program to make sense, you also need a JSON file from Faceboo
 
 ### Executing program
 
+In the src directory
+
    ```sh
    python main.py
    ```
@@ -48,7 +50,7 @@ For smaller file (and faster request process) select **low quality** media (if y
 
 ### 2. Download and unpack zip file(s)
 
-### 3. Execute program using **python main.py** command in appropriate directory or by using IDE eg PyCharm (which is always safer in the event of a program crash)
+### 3. Run the program using **python main.py** command in appropriate directory or by using IDE eg PyCharm (which is always safer in the event of a program crash)
 
 ### 4. decide if you want to analyze conversations from your entire facebook <a href="#41-all-conversations">4.1</a> or just a single given conversation <a href="#42-specific-conversation">4.2</a>
 
